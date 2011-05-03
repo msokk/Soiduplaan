@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+
 
 namespace Soiduplaan.ViewModels
 {
-    public class RouteItemViewModel : INotifyPropertyChanged
+    public class RouteViewModel : INotifyPropertyChanged
     {
+        public ObservableCollection<RouteItemViewModel> RouteItems { get; private set; }
 
         private string _title;
 
@@ -24,41 +27,42 @@ namespace Soiduplaan.ViewModels
             }
         }
 
-        private string _dueTime;
+        private string _type;
 
-        public string DueTime
+        public string Type
         {
             get
             {
-                return _dueTime;
+                return _type;
             }
             set
             {
-                if (value != _dueTime)
+                if (value != _type)
                 {
-                    _dueTime = value;
-                    NotifyPropertyChanged("DueTime");
+                    _type = value;
+                    NotifyPropertyChanged("Type");
                 }
             }
         }
 
-        private string _nextDeparture;
+        private string _number;
 
-        public string NextDeparture
+        public string Number
         {
             get
             {
-                return _nextDeparture;
+                return _number;
             }
             set
             {
-                if (value != _nextDeparture)
+                if (value != _number)
                 {
-                    _nextDeparture = value;
-                    NotifyPropertyChanged("NextDeparture");
+                    _number = value;
+                    NotifyPropertyChanged("Number");
                 }
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
@@ -69,6 +73,5 @@ namespace Soiduplaan.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
     }
 }

@@ -8,7 +8,7 @@ namespace Soiduplaan.ViewModels
 {
     public class StopViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<RouteItemViewModel> RouteItems { get; private set; }
+        public ObservableCollection<StopItemViewModel> RouteItems { get; private set; }
 
         private GeoCoordinate _coordinates;
 
