@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var Scraper = require(__dirname + '/lib/scraper');
+
+var scraper = new Scraper({
+  log: true,
+  rate: 2
+});
+scraper.start();
