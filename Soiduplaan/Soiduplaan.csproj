@@ -74,7 +74,9 @@
     <Compile Include="ViewModels\FavouriteItemViewModel.cs" />
     <Compile Include="ViewModels\FavouriteViewModel.cs" />
     <Compile Include="ViewModels\RouteItemViewModel.cs" />
+    <Compile Include="ViewModels\RouteStopViewModel.cs" />
     <Compile Include="ViewModels\RouteViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleItemViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SearchItemViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
