@@ -1,11 +1,12 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="Soiduplaan.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    x:Class="Soiduplaan.MainPage" 
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
     d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -13,6 +14,107 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Key="TileButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+							
+								<Grid x:Name="grid" Background="{StaticResource PhoneAccentBrush}">
+                    		<Grid.Projection>
+                    			<PlaneProjection/>
+                    		</Grid.Projection>
+                    		<Grid.RowDefinitions>
+                    			<RowDefinition Height="Auto" />
+                    			<RowDefinition Height="*" />
+                    		</Grid.RowDefinitions>
+								
+                    		<VisualStateManager.VisualStateGroups>
+                    			<VisualStateGroup x:Name="CommonStates">
+                    				<VisualStateGroup.Transitions>
+                    					<VisualTransition GeneratedDuration="0"/>
+                    					<VisualTransition From="Pressed" GeneratedDuration="0:0:0.1" To="Normal">
+                    						<Storyboard AutoReverse="False"/>
+                    					</VisualTransition>
+                    				</VisualStateGroup.Transitions>
+                    				<VisualState x:Name="Normal"/>
+                    				<VisualState x:Name="MouseOver"/>
+                    				<VisualState x:Name="Pressed">
+                    					<Storyboard>
+                    						<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="grid">
+                    							<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    							<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
+                    						</DoubleAnimationUsingKeyFrames>
+                    						<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="grid">
+                    							<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    							<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
+                    						</DoubleAnimationUsingKeyFrames>
+                    					</Storyboard>
+                    				</VisualState>
+                    				<VisualState x:Name="Disabled"/>
+                    			</VisualStateGroup>
+                    			<VisualStateGroup x:Name="FocusStates">
+                    				<VisualState x:Name="Focused"/>
+                    				<VisualState x:Name="Unfocused"/>
+                    			</VisualStateGroup>
+                    		</VisualStateManager.VisualStateGroups>
+								
+                    		<Image Grid.Row="1" Source="/ApplicationIcon.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="113" Width="113" Margin="0,5,0,0"/>
+								
+                    		<ContentPresenter Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    	</Grid>
+							
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TileButton3" TargetType="Button">
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="Button">
+							
+        				<Grid x:Name="grid" Background="{StaticResource PhoneAccentBrush}">
+        					<Grid.Projection>
+        						<PlaneProjection/>
+        					</Grid.Projection>
+        					<Grid.RowDefinitions>
+        						<RowDefinition Height="Auto" />
+        						<RowDefinition Height="*" />
+        					</Grid.RowDefinitions>
+								
+        					<VisualStateManager.VisualStateGroups>
+        						<VisualStateGroup x:Name="CommonStates">
+        							<VisualStateGroup.Transitions>
+        								<VisualTransition From="Pressed" GeneratedDuration="0:0:0.1" To="Normal"/>
+        							</VisualStateGroup.Transitions>
+        							<VisualState x:Name="Normal"/>
+        							<VisualState x:Name="MouseOver"/>
+        							<VisualState x:Name="Pressed">
+        								<Storyboard>
+        									<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="grid">
+        										<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        										<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
+        									</DoubleAnimationUsingKeyFrames>
+        									<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="grid">
+        										<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        										<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
+        									</DoubleAnimationUsingKeyFrames>
+        								</Storyboard>
+        							</VisualState>
+        							<VisualState x:Name="Disabled"/>
+        						</VisualStateGroup>
+        					</VisualStateManager.VisualStateGroups>
+								
+        					<Image Grid.Row="1" Source="/SplashScreenImage.jpg" HorizontalAlignment="Center" VerticalAlignment="Top" Height="113" Width="113" Margin="0,5,0,0"/>
+								
+        					<ContentPresenter Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        				</Grid>
+							
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -23,25 +125,37 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="SÕIDUPLAAN" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="kodu" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox x:Name="MainListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="MainListBox_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                      <StackPanel Margin="0,0,0,17" Width="432">
-                          <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                          <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                      </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <StackPanel HorizontalAlignment="Right" Width="100" Margin="0,0,0,221">
+                <Rectangle Fill="#FFF4F4F5" Height="100" Stroke="Black" Margin="0,0,0,40"/>
+                <Rectangle Fill="#FFF4F4F5" Height="100" Stroke="Black" Margin="0,0,0,40"/>
+                <Rectangle Fill="#FFF4F4F5" Height="100" Stroke="Black"/>
+            </StackPanel>
+            <ScrollViewer HorizontalAlignment="Left">
+                <toolkit:WrapPanel Width="346">
+                    <Button Content="Lemmikud" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0"/>
+                    <Button Content="Peatused" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton3}" VerticalAlignment="Top" Width="150"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0,0,40,40"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0,0,40,40"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0,0,40,40"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0,0,40,40"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0"/>
+                    <Rectangle Fill="#FF0C0C49" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Margin="0,0,40,40"/>
+                </toolkit:WrapPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
- 
+
     <!--Sample code showing usage of ApplicationBar-->
     <!--<phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
