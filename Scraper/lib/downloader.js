@@ -1,7 +1,7 @@
 var http = require('http'),
     querystring = require('querystring'),
     util = require('util'),
-    xml2js = require('xml2js');
+    xml2js = require(__dirname + '/xml2js');
 
 var host = 'soiduplaan.tallinn.ee';
 

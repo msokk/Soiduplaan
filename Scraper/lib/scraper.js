@@ -34,7 +34,9 @@ var Scraper = function(settings) {
 /**
  * Output structure
  */
-Scraper.prototype.out = {};
+Scraper.prototype.out = {
+  routes: []
+};
 
 /**
  * Predefined constants
@@ -56,7 +58,17 @@ Scraper.prototype.dict = {
     'stops',
     'schedule',
     'timing'
-  ]
+  ],
+  
+  dayMap: {
+    '1': 0,
+    '2': 1,
+    '4': 2,
+    '8': 3,
+    '16': 4,
+    '32': 5,
+    '64': 6
+  }
 };
 
 /**
@@ -124,8 +136,8 @@ Scraper.prototype.fetch = function(action, params, callback) {
         that.jsonCounter += serializedJSON.length;
         
         //Save human readable and regular JSON to disk for caching
-        fs.writeFile(path + '.json', serializedJSON);
-        fs.writeFile(path + '-human.json', util.inspect(data, false, null));
+        fs.writeFileSync(path + '.json', serializedJSON);
+        fs.writeFileSync(path + '-human.json', util.inspect(data, false, null));
         
         console.timeEnd('Fetch');
         callback && callback(data);
@@ -148,20 +160,41 @@ Scraper.prototype.writeObj = function(key) {
  * Parser logic methods *
  ************************/
 
-Scraper.prototype.parseRoute = function(obj) {
-  this.out.routes = [];
+Scraper.prototype.parseRoute = function(obj, cb) {
+  var dayMap = this.dict.dayMap;
   for(var i = 0; i < obj.length; i++) {
-    this.out.routes[i] = obj[i];
-    /*this.queue('schedule', {
-      'schedule_id': obj[i].schedule_id
-    }, function(data) {
-    });*/ 
+  
+    var route = {
+      number: obj[i].number,
+      title: obj[i].direction,
+      lowfloor: obj[i].lowfloor,
+      vehicle: obj[i].vehicle
+    };
+    var schedules = [];
+    var days = obj[i].days.day;
+    
+    for(var u = 0; u < days.length; u++) {
+      if(days[u].schedule_id) {
+        schedules.push({
+          day: dayMap[days[u].day_num],
+          id: days[u].schedule_id,
+          directionid: days[u].direction_id,
+          validfrom: days[u].valid
+        });
+      }
+    }
+    route['schedules'] = schedules;
+    this.out.routes.push(route);
   }
-  console.log(this.jsonCounter);
-  console.log(this.xmlCounter);
-
+  
+  cb && cb();
 };
 
+Scraper.prototype.printStat = function() {
+  //Statistics
+  console.log('JSON Size: ' + this.jsonCounter + 'bytes');
+  console.log('XML Size: ' + this.xmlCounter + ' bytes');
+};
 
 
 
@@ -179,12 +212,13 @@ Scraper.prototype.start = function() {
   }, function(data) {
     out.generic = {};
     var types = data.types.type;
-    out.generic.types = {};
+    out.generic.types = [];
     for(var i = 0; i < types.length; i++) {
-      out.generic.types[types[i]['#']] = {
+      out.generic.types.push({
+        type: types[i]['#'],
         routes: types[i]['@'].routes,
         city: types[i]['@'].city
-      }
+      });
     }
     
     that.writeObj('generic');
@@ -195,10 +229,14 @@ Scraper.prototype.start = function() {
     this.queue('routes', {
       'transport_id': transports[i]
     }, function(data) {
-      that.parseRoute(data.routes.route);
+      that.parseRoute(data.routes.route, routesDone);
     }); 
-  }
+  }  
   
+  //Step 2 - Fetch all schedules
+  var routesDone = function() {
+    that.writeObj('routes');
+  };
 
 };
 
