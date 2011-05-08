@@ -148,6 +148,15 @@ Scraper.prototype.fetch = function(action, params, callback) {
 };
 
 /**
+ * Prints counters
+ */
+Scraper.prototype.printStat = function() {
+  //Statistics
+  console.log('JSON Size: ' + this.jsonCounter + 'bytes');
+  console.log('XML Size: ' + this.xmlCounter + ' bytes');
+};
+
+/**
  * Dumps object as JSON to public
  * @param {String} output key
  */
@@ -190,11 +199,56 @@ Scraper.prototype.parseRoute = function(obj, cb) {
   cb && cb();
 };
 
-Scraper.prototype.printStat = function() {
-  //Statistics
-  console.log('JSON Size: ' + this.jsonCounter + 'bytes');
-  console.log('XML Size: ' + this.xmlCounter + ' bytes');
+/**
+ * Parses stops from cache
+ * @param {Function} callback with object
+ */
+Scraper.prototype.getCSVStops = function(callback) {
+  download('cache', 'stops.txt', function(data) {
+    var stops = [];
+    var lines = data.split('\n');
+    for(var i = 0; i < lines.length; i++) {
+      var stop = lines[i].split(';');
+      stops.push({
+        stop_id: stop[0],
+        title: stop[1],
+        latitude: stop[2],
+        longitude: stop[3]
+      });
+    }
+    callback && callback(stops);
+  });
 };
+
+/**
+ * Parses stops from cache
+ * @param {Function} callback with object
+ */
+Scraper.prototype.getCSVRoutes = function(callback) {
+  download('cache', 'routes.txt', function(data) {
+    var routes = [];
+    var lines = data.split('\n');
+    for(var i = 0; i < lines.length; i++) {
+      var route = lines[i].split(';');
+      var routestops = [];
+      for(var u = 6; u < route.length; u++) {
+        routestops.push(route[u]);
+      }
+      
+      routes.push({
+        city: route[0],
+        vehicle: route[1],
+        provider: route[2],
+        number: route[3],
+        direction_id: route[4],
+        title: route[5],
+        stops: routestops
+      });
+    }
+    callback && callback(routes);
+  });
+};
+
 
 
 
@@ -205,6 +259,12 @@ Scraper.prototype.start = function() {
   var that = this;
   var transports = this.dict.transport_id;
   var out = this.out;
+  
+  this.getCSVRoutes(function(routes) {
+    console.log(routes);
+  });
+
+  /*
   
   //Gather misc data under generic.json
   this.queue('routes', {
@@ -237,7 +297,7 @@ Scraper.prototype.start = function() {
   var routesDone = function() {
     that.writeObj('routes');
   };
-
+*/
 };
 
 

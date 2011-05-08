@@ -7,6 +7,23 @@ var host = 'soiduplaan.tallinn.ee';
 
 module.exports = function(action, params, callback) {
   if(!action) throw new Error('Action missing!');
+  
+  if(action == 'cache') {
+    var r = http.get({ host: host, port: 80, path: '/cache/' + params }, function(res) {
+      var buffer = '';
+      res.on('data', function(chunk) {
+        buffer += chunk;
+      });
+      
+      res.on('end', function() {
+        callback && callback(buffer);
+      });
+    }).on('error', function(e) {
+      console.error(e.message);
+    });
+    return null;
+  }
+  
   params = params || {};
   params.a = 'p.' + action;
   params.t = 'xml';
