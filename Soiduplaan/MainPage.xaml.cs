@@ -33,5 +33,17 @@ namespace Soiduplaan
                 App.ViewModel.LoadData();
             }
         }
+
+        private void TileButton1Click(object sender, RoutedEventArgs e)
+        {
+            ScreenTransitionHide.Begin();
+            ScreenTransitionHide.Completed += new EventHandler(TransitionCompleted);
+        }
+
+        private void TransitionCompleted(object sender, EventArgs e)
+        {
+            //navigate to a new page here!
+            ScreenTransitionShow.Begin();
+        }
     }
 }
