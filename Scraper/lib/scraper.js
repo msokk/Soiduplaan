@@ -259,10 +259,13 @@ Scraper.prototype.start = function() {
   var that = this;
   var transports = this.dict.transport_id;
   var out = this.out;
+    this.queue('stops', {
+      'schedule': 3326,
+      'direction_id': 21723
+    }, function(data) {
+      console.log(data.directions.type.direction);
+    }); 
   
-  this.getCSVRoutes(function(routes) {
-    console.log(routes);
-  });
 
   /*
   
