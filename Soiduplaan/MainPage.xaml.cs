@@ -36,6 +36,7 @@ namespace Soiduplaan
 
         private void TileButton1Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(Models.Route.LoadById(0).Title);
             ScreenTransitionHide.Begin();
             ScreenTransitionHide.Completed += new EventHandler(TransitionCompleted);
         }

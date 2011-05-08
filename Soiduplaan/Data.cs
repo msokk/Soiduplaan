@@ -67,7 +67,7 @@ namespace Soiduplaan
 
         public static void UpdateData()
         {
-            string[] filenames = { "generic.json" };
+            string[] filenames = { "generic.json", "routes.json" };
 
             for (int i = 0; i < filenames.Length; i++)
             {
@@ -79,6 +79,13 @@ namespace Soiduplaan
         private static void UpdateData_Done(object sender, DownloadedEventArgs e)
         {
             saveFileToPhone(e.Filename, e.JSON);
+        }
+
+        public static IsolatedStorageSettings Settings {
+            get
+            {
+                return IsolatedStorageSettings.ApplicationSettings;
+            }
         }
     }
 }

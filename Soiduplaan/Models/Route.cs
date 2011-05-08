@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Soiduplaan.Models
 {
@@ -107,7 +108,7 @@ namespace Soiduplaan.Models
 
         private void SetSchedule(int dayofweek, Schedule schedule)
         {
-            _schedules[(dayofweek-1)] = schedule;
+            _schedules[dayofweek] = schedule;
         }
 
         public Route(string number, string title, bool lowfloor, string vehicle)
@@ -118,14 +119,36 @@ namespace Soiduplaan.Models
             _vehicle = vehicle;
         }
 
-        public static Route[] LoadAll() {
-            Route test = new Route("212A", "Kiviõli - Kivi", false, "Buss");
-            test.SetSchedule(1, new Schedule(1, 1, "2011.01.01"));
+        public static Route[] LoadAll() 
+        {
+            JArray json = JArray.Parse(Data.loadJSON("routes.json"));
+            List<Route> routes = new List<Route>();
+            
+            foreach(var r in json) {
+                bool lowfloor = ((string)r["lowfloor"] == "1")? true: false;
+                string number = (r["number"].GetType() == typeof(JObject))? "": (string)r["number"];
+                Route tmp = new Route(number, (string)r["title"], 
+                    lowfloor, (string)r["vehicle"]);
 
-            //Load file, parse json, 
-            JObject json = JObject.Parse("{}");
+                foreach (var sc in r["schedules"])
+                {
+                    tmp.SetSchedule((int)sc["day"], new Schedule(
+                        Int32.Parse((string)sc["id"]),
+                        Int32.Parse((string)sc["directionid"]),
+                        (string)sc["validfrom"]
+                    ));
+                }
 
-            return null;
+                routes.Add(tmp);
+            }
+
+            return routes.ToArray();
+        }
+
+        public static Route LoadById(int id)
+        {
+            Route[] routes = LoadAll();
+            return routes[id];
         }
 
 
