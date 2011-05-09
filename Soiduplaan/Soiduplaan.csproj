@@ -74,6 +74,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Stop.cs" />
     <Compile Include="Models\Generic.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
