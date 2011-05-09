@@ -46,18 +46,19 @@
 
             <!--Pivot item two-->
             <controls:PivotItem Header="liinid">
-
-                    <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0">
+                    <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0" Height="487" Width="470">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
+                            <Grid>
                                 <TextBlock Text="{Binding Title}" />
+                            </Grid>
+                            
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-
             </controls:PivotItem>
         </controls:Pivot>
-
+        <TextBox Height="72" HorizontalAlignment="Stretch" Margin="0,150,0,0" Name="textBox1" VerticalAlignment="Top" />
     </Grid>
 
     <!--Sample code showing usage of ApplicationBar-->
