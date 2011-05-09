@@ -36,15 +36,16 @@ namespace Soiduplaan
 
         private void TileButton1Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Models.Route.LoadById(0).Title);
-            ScreenTransitionHide.Begin();
-            ScreenTransitionHide.Completed += new EventHandler(TransitionCompleted);
+            //MessageBox.Show(Models.Route.LoadById(0).Title);
+            //ScreenTransitionHide.Begin();
+            //ScreenTransitionHide.Completed += new EventHandler(TransitionCompleted);
+            NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
         }
 
-        private void TransitionCompleted(object sender, EventArgs e)
-        {
-            //navigate to a new page here!
-            ScreenTransitionShow.Begin();
-        }
+        //private void TransitionCompleted(object sender, EventArgs e)
+        //{
+        //    //navigate to a new page here!
+        //    ScreenTransitionShow.Begin();
+        //}
     }
 }

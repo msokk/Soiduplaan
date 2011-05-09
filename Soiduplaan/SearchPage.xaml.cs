@@ -24,7 +24,13 @@ namespace Soiduplaan
         // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Models.Route[] liinid = Models.Route.LoadAll();
             
+            foreach (var liin in liinid)
+            {
+                ListBoxItem li = new ListBoxItem();
+
+            }
             //MessageBox.Show(Data.loadJSON("generic.json"));
             //string selectedIndex = "";
             //if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))

@@ -14,6 +14,27 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideRightFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
     <phone:PhoneApplicationPage.Resources>
         <Style x:Key="TileButton" TargetType="Button">
             <Setter Property="Template">
@@ -58,7 +79,7 @@
                     			</VisualStateGroup>
                     		</VisualStateManager.VisualStateGroups>
 								
-                    		<Image Grid.Row="1" Source="Images/star2.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="113" Width="113" Margin="0,5,0,0"/>
+                    		<Image Grid.Row="1" Source="Images/star.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="113" Width="113" Margin="0,5,0,0"/>
 								
                     		<ContentPresenter Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                     	</Grid>
