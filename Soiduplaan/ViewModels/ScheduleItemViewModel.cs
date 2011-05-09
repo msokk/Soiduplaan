@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace Soiduplaan.ViewModels
+namespace Soiduplaan
 {
     public class ScheduleItemViewModel : INotifyPropertyChanged
     {

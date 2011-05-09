@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 
-namespace Soiduplaan.Models
+namespace Soiduplaan
 {
     public class GenericInfo
     {

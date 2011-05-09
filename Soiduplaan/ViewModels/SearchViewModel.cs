@@ -12,6 +12,11 @@ namespace Soiduplaan
             this.AllItems = new ObservableCollection<SearchItemViewModel>();
             this.StopItems = new ObservableCollection<SearchItemViewModel>();
             this.RouteItems = new ObservableCollection<SearchItemViewModel>();
+            Route[] routes = Route.LoadAll();
+            foreach (var r in routes)
+            {
+                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Vehicle + " " + r.Number + " - " + r.Title }); 
+            }
         }
 
         public ObservableCollection<SearchItemViewModel> AllItems { get; private set; }

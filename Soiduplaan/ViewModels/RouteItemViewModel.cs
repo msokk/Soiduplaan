@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Soiduplaan.ViewModels
+namespace Soiduplaan
 {
     public class RouteItemViewModel : INotifyPropertyChanged
     {

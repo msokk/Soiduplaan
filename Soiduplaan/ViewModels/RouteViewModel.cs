@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 
 
-namespace Soiduplaan.ViewModels
+namespace Soiduplaan
 {
     public class RouteViewModel : INotifyPropertyChanged
     {

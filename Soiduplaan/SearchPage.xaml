@@ -38,7 +38,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="SÕIDUPLAAN">
+        <controls:Pivot Title="SÕIDUPLAAN" SelectedIndex="1">
             <!--Pivot item one-->
             <controls:PivotItem Header="peatused">
                 <Grid></Grid>
@@ -46,16 +46,18 @@
 
             <!--Pivot item two-->
             <controls:PivotItem Header="liinid">
-                <Grid/>
+
+                    <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
             </controls:PivotItem>
         </controls:Pivot>
-        <ListBox Name="paneel" Margin="40,188,36,244">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
     </Grid>
 
     <!--Sample code showing usage of ApplicationBar-->

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Device.Location;
 
-namespace Soiduplaan.ViewModels
+namespace Soiduplaan
 {
     public class NearbyStopsViewModel : INotifyPropertyChanged
     {

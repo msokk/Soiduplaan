@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Device.Location;
 
 
-namespace Soiduplaan.ViewModels
+namespace Soiduplaan
 {
     public class StopViewModel : INotifyPropertyChanged
     {
