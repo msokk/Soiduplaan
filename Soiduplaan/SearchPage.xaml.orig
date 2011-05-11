@@ -73,7 +73,31 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </controls:PivotItem>
+<<<<<<< HEAD
+            
+=======
 
+            <!--Pivot item two-->
+            <controls:PivotItem Header="liinid">
+                    <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0" Height="487" Width="470" SelectionChanged="showRoute">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="70" />
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{Binding IconUrl}" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
+                                    <TextBlock Text="{Binding Title}" FontSize="21" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+            </controls:PivotItem>
+>>>>>>> 0017b7a9e131936102f7344ad218aaf5438e2265
         </controls:Pivot>
         <TextBox Height="72" HorizontalAlignment="Stretch" Margin="0,150,0,0" Name="textBox1" VerticalAlignment="Top" />
     </Grid>
