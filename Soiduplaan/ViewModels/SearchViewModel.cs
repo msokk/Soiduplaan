@@ -17,6 +17,12 @@ namespace Soiduplaan
             {
                 this.RouteItems.Add(new SearchItemViewModel() { Title = r.Vehicle + " " + r.Number + " - " + r.Title }); 
             }
+
+            Stop[] stops = Stop.LoadAll();
+            foreach (var s in stops)
+            {
+                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title });
+            }
         }
 
         public ObservableCollection<SearchItemViewModel> AllItems { get; private set; }

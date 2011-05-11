@@ -41,7 +41,16 @@
         <controls:Pivot Title="SÕIDUPLAAN" SelectedIndex="1">
             <!--Pivot item one-->
             <controls:PivotItem Header="peatused">
-                <Grid></Grid>
+                <ListBox Name="paneel2" ItemsSource="{Binding StopItems}" Margin="0,3,0,0" Height="487" Width="470">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Title}" />
+                            </Grid>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </controls:PivotItem>
 
             <!--Pivot item two-->

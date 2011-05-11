@@ -35,7 +35,8 @@ var Scraper = function(settings) {
  * Output structure
  */
 Scraper.prototype.out = {
-  routes: []
+  routes: [],
+  stops: []
 };
 
 /**
@@ -156,6 +157,26 @@ Scraper.prototype.printStat = function() {
   console.log('XML Size: ' + this.xmlCounter + ' bytes');
 };
 
+
+/**
+ * Cyclic sync struct
+ * @param {Number} Cycle length
+ * @param {Function} Function with code, gets an cb for calling next iteration
+ * @param {Function} callback for ending the callback
+ */
+Scraper.prototype.cycle = function(cLength, codeFunc, doneCb) {
+  var i = 0;
+  var cb = function() {
+    if(i != cLength-1) {
+      i++;
+      codeFunc(cb, i);
+    } else {
+      doneCb();
+    }
+  }
+  
+  codeFunc(cb, i);
+};
 /**
  * Dumps object as JSON to public
  * @param {String} output key
@@ -194,9 +215,11 @@ Scraper.prototype.parseRoute = function(obj, cb) {
     }
     route['schedules'] = schedules;
     this.out.routes.push(route);
+    
+    if(i == obj.length-1) {
+      cb && cb();
+    }
   }
-  
-  cb && cb();
 };
 
 /**
@@ -208,13 +231,15 @@ Scraper.prototype.getCSVStops = function(callback) {
     var stops = [];
     var lines = data.split('\n');
     for(var i = 0; i < lines.length; i++) {
-      var stop = lines[i].split(';');
-      stops.push({
-        stop_id: stop[0],
-        title: stop[1],
-        latitude: stop[2],
-        longitude: stop[3]
-      });
+      if(lines[i] != '') {
+        var stop = lines[i].split(';');
+        stops.push({
+          stop_id: stop[0],
+          title: stop[1],
+          latitude: stop[2],
+          longitude: stop[3]
+        });
+      }
     }
     callback && callback(stops);
   });
@@ -258,17 +283,8 @@ Scraper.prototype.getCSVRoutes = function(callback) {
 Scraper.prototype.start = function() {
   var that = this;
   var transports = this.dict.transport_id;
-  var out = this.out;
-    this.queue('stops', {
-      'schedule': 3326,
-      'direction_id': 21723
-    }, function(data) {
-      console.log(data.directions.type.direction);
-    }); 
-  
+  var out = this.out; 
 
-  /*
-  
   //Gather misc data under generic.json
   this.queue('routes', {
     'transport_id': 'bus'
@@ -287,20 +303,49 @@ Scraper.prototype.start = function() {
     that.writeObj('generic');
   });
   
-  //Step 1 - Fetch all transports
-  for(var i = 0; i < transports.length; i++) {
-    this.queue('routes', {
+  //Step 1 - Fetch all routes
+  this.cycle(transports.length, function(cb, i) {
+    that.queue('routes', {
       'transport_id': transports[i]
     }, function(data) {
-      that.parseRoute(data.routes.route, routesDone);
-    }); 
-  }  
-  
-  //Step 2 - Fetch all schedules
+      that.parseRoute(data.routes.route, function() {
+        cb();
+      });
+    });
+  }, function() {
+    routesDone();
+  });
+
+  //Step 2 - Fetch all stops
   var routesDone = function() {
     that.writeObj('routes');
+    that.getCSVStops(function(data) {
+      var currentStop = { stops: [] };
+      for(var i = 0; i < data.length; i++) {
+        //Next stopgroup
+        if(currentStop.title && data[i].title != '') {
+          that.out.stops.push(currentStop);
+          currentStop = { stops: [] };
+        }
+        
+        //Set the title
+        if(data[i].title != '') {
+          currentStop.title = data[i].title;
+        }
+        
+        delete data[i].title;
+        
+        currentStop.stops.push({
+          id: data[i].stop_id,
+          lat: data[i].latitude,
+          lon: data[i].longitude
+        });
+        
+      }
+      that.writeObj('stops');
+    });
   };
-*/
+
 };
 
 

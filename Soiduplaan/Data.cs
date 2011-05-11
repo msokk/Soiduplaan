@@ -67,7 +67,7 @@ namespace Soiduplaan
 
         public static void UpdateData()
         {
-            string[] filenames = { "generic.json", "routes.json" };
+            string[] filenames = { "generic.json", "routes.json", "stops.json" };
 
             for (int i = 0; i < filenames.Length; i++)
             {
