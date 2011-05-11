@@ -34,18 +34,18 @@ namespace Soiduplaan
             }
         }
 
-        private void TileButton1Click(object sender, RoutedEventArgs e)
+        private void favouriteTile_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(Models.Route.LoadById(0).Title);
-            //ScreenTransitionHide.Begin();
-            //ScreenTransitionHide.Completed += new EventHandler(TransitionCompleted);
-            NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
         }
 
-        //private void TransitionCompleted(object sender, EventArgs e)
-        //{
-        //    //navigate to a new page here!
-        //    ScreenTransitionShow.Begin();
-        //}
+        private void routeTile_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SearchPage.xaml?tab=0", UriKind.Relative));
+        }
+
+        private void stopTile_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SearchPage.xaml?tab=1", UriKind.Relative));
+        }
     }
 }

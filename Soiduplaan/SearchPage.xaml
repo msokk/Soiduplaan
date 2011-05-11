@@ -38,8 +38,29 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="SÕIDUPLAAN" SelectedIndex="1">
+        <controls:Pivot Name="searchPivot" Title="SÕIDUPLAAN">
             <!--Pivot item one-->
+            <controls:PivotItem Header="liinid">
+                <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0" Height="487" Width="470">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="70" />
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding IconUrl}" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
+                                <TextBlock Text="{Binding Title}" FontSize="21" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PivotItem>
+
+            <!--Pivot item two-->
             <controls:PivotItem Header="peatused">
                 <ListBox Name="paneel2" ItemsSource="{Binding StopItems}" Margin="0,3,0,0" Height="487" Width="470">
                     <ListBox.ItemTemplate>
@@ -52,27 +73,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </controls:PivotItem>
-
-            <!--Pivot item two-->
-            <controls:PivotItem Header="liinid">
-                    <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0" Height="487" Width="470">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="60" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="70" />
-                                    </Grid.RowDefinitions>
-                                    <Image Source="{Binding IconUrl}" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
-                                    <TextBlock Text="{Binding Title}" FontSize="21" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-            </controls:PivotItem>
+            
         </controls:Pivot>
         <TextBox Height="72" HorizontalAlignment="Stretch" Margin="0,150,0,0" Name="textBox1" VerticalAlignment="Top" />
     </Grid>

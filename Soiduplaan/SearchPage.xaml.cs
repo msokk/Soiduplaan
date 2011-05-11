@@ -26,13 +26,7 @@ namespace Soiduplaan
         // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //MessageBox.Show(Data.loadJSON("generic.json"));
-            //string selectedIndex = "";
-            //if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
-            //{
-            //    int index = int.Parse(selectedIndex);
-            //    DataContext = App.ViewModel.Items[index];
-            //}
+            searchPivot.SelectedIndex = Int32.Parse(NavigationContext.QueryString["tab"]);
         }
     }
 }

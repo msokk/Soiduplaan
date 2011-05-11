@@ -241,11 +241,11 @@
             </StackPanel>
             <ScrollViewer HorizontalAlignment="Left">
                 <toolkit:WrapPanel Width="346">
-                    <Button Content="Lemmikud" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150" Click="TileButton1Click" />
-                    <Button Content="Liinid" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource TileButton2}" VerticalAlignment="Top" Width="150"/>
-                    <Button Content="Peatused" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton3}" VerticalAlignment="Top" Width="150"/>
-                    <Button Content="Lähedal" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150"/>
-                    <Button Content="Tagasiside" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150"/>
+                    <Button Content="Lemmikud" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150" Name="favouriteTile" Click="favouriteTile_Click" />
+                    <Button Content="Liinid" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource TileButton2}" VerticalAlignment="Top" Width="150" Name="routeTile" Click="routeTile_Click" />
+                    <Button Content="Peatused" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton3}" VerticalAlignment="Top" Width="150" Name="stopTile" Click="stopTile_Click" />
+                    <Button Content="Lähedal" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150" Name="nearbyTile" />
+                    <Button Content="Tagasiside" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150" Name="feedbackTile" />
                     <Button Content="Placeholder" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150"/>
                     <Button Content="Placeholder" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150"/>
                 </toolkit:WrapPanel>
