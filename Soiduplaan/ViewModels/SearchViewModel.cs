@@ -15,7 +15,21 @@ namespace Soiduplaan
             Route[] routes = Route.LoadAll();
             foreach (var r in routes)
             {
-                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Vehicle + " " + r.Number + " - " + r.Title }); 
+                string iconName = "";
+                switch (r.Vehicle)
+                {
+                    case "Bus-p":
+                        iconName = "Bus";
+                        break;
+                    case "Busexpress":
+                    iconName = "Bus";
+                        break;
+                    default:
+                        iconName = (r.Vehicle.StartsWith("H")) ? "Marsa" : r.Vehicle;
+                        break;
+                }
+                string _iconUrl = "Images/" + iconName + "Icon.png";
+                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Number + " - " + r.Title, IconUrl = _iconUrl}); 
             }
 
             Stop[] stops = Stop.LoadAll();
