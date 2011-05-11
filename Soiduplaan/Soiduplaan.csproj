@@ -138,7 +138,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\star.png" />
-    <Resource Include="Images\tram.png" />
+    <Resource Include="Images\TrammIcon.png" />
+    <Resource Include="Images\BusIcon.png" />
+    <Resource Include="Images\TrollIcon.png" />
+    <Resource Include="Images\MarsaIcon.png" />
+    <Resource Include="Images\RongIcon.png" />
     <Content Include="Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="Newtonsoft.Json.WindowsPhone.dll" />
     <Content Include="SplashScreenImage.jpg" />

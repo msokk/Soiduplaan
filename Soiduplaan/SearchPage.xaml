@@ -50,7 +50,15 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                             <Grid>
-                                <TextBlock Text="{Binding Title}" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="70" />
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding IconUrl}" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
+                                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
                             </Grid>
                             
                             </DataTemplate>
