@@ -34,5 +34,11 @@ namespace Soiduplaan
             //    DataContext = App.ViewModel.Items[index];
             //}
         }
+
+        private void showRoute(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox list = sender as ListBox;
+            int index = list.SelectedIndex;
+        }
     }
 }

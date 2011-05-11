@@ -55,7 +55,7 @@
 
             <!--Pivot item two-->
             <controls:PivotItem Header="liinid">
-                    <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0" Height="487" Width="470">
+                    <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0" Height="487" Width="470" SelectionChanged="showRoute">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

@@ -77,11 +77,15 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\RouteItem.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Stop.cs" />
     <Compile Include="Models\Generic.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoutePage.xaml.cs">
+      <DependentUpon>RoutePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="RoutePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -138,11 +146,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\star.png" />
-    <Resource Include="Images\TrammIcon.png" />
+    <Resource Include="Images\TrammIcon2.png" />
     <Resource Include="Images\BusIcon.png" />
     <Resource Include="Images\TrollIcon.png" />
     <Resource Include="Images\MarsaIcon.png" />
     <Resource Include="Images\RongIcon.png" />
+    <Resource Include="Images\TrammIcon.png" />
     <Content Include="Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="Newtonsoft.Json.WindowsPhone.dll" />
     <Content Include="SplashScreenImage.jpg" />
