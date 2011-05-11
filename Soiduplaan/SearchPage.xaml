@@ -58,7 +58,7 @@
                                         <RowDefinition Height="70" />
                                     </Grid.RowDefinitions>
                                     <Image Source="{Binding IconUrl}" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
-                                    <TextBlock Text="{Binding Title}" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
+                                    <TextBlock Text="{Binding Title}" FontSize="21" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
