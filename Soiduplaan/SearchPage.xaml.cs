@@ -28,5 +28,11 @@ namespace Soiduplaan
         {
             searchPivot.SelectedIndex = Int32.Parse(NavigationContext.QueryString["tab"]);
         }
+
+        private void showRoute(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox list = sender as ListBox;
+            int index = list.SelectedIndex;
+        }
     }
 }

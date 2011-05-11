@@ -7,6 +7,14 @@ namespace Soiduplaan
 {
     public class RouteViewModel : INotifyPropertyChanged
     {
+        public RouteViewModel()
+        {
+            this.RouteItems = new ObservableCollection<RouteItemViewModel>();
+            for (int i = 0; i <= 19; i++) {
+                this.RouteItems.Add(new RouteItemViewModel() { Title = "Keemia" });
+            }
+        }
+
         public ObservableCollection<RouteItemViewModel> RouteItems { get; private set; }
 
         private string _title;
