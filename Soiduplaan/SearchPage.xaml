@@ -49,18 +49,17 @@
                     <ListBox Name="paneel" ItemsSource="{Binding RouteItems}" Margin="0,3,0,0" Height="487" Width="470">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="70" />
-                                </Grid.RowDefinitions>
-                                <Image Source="{Binding IconUrl}" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
-                                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
-                            </Grid>
-                            
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="70" />
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{Binding IconUrl}" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
+                                    <TextBlock Text="{Binding Title}" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
