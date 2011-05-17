@@ -11,7 +11,7 @@ namespace Soiduplaan
         {
             this.RouteItems = new ObservableCollection<RouteItemViewModel>();
             for (int i = 0; i <= 19; i++) {
-                this.RouteItems.Add(new RouteItemViewModel() { Title = "Keemia" });
+                this.RouteItems.Add(new RouteItemViewModel() { Title = "Keemia", NextDeparture = "000", DueTime = "00000"});
             }
         }
 

@@ -13,12 +13,11 @@ using Microsoft.Phone.Controls;
 
 namespace Soiduplaan
 {
-    public partial class RoutePage : PhoneApplicationPage
+    public partial class RouteStop : PhoneApplicationPage
     {
-        public RoutePage()
+        public RouteStop()
         {
             InitializeComponent();
         }
-
     }
 }

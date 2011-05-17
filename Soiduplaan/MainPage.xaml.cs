@@ -36,6 +36,7 @@ namespace Soiduplaan
 
         private void favouriteTile_Click(object sender, RoutedEventArgs e)
         {
+            NavigationService.Navigate(new Uri("/FavouritesPage.xaml", UriKind.Relative));
         }
 
         private void routeTile_Click(object sender, RoutedEventArgs e)
