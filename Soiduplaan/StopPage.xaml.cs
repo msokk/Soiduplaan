@@ -18,6 +18,7 @@ namespace Soiduplaan
         public StopPage()
         {
             InitializeComponent();
+            DataContext = new StopViewModel();
         }
     }
 }

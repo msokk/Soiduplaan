@@ -8,6 +8,13 @@ namespace Soiduplaan
 {
     public class StopViewModel : INotifyPropertyChanged
     {
+
+        public StopViewModel()
+        {
+            _coordinates = CurrentLocation.Current.Location;         
+        }
+
+
         public ObservableCollection<StopItemViewModel> RouteItems { get; private set; }
 
         private GeoCoordinate _coordinates;

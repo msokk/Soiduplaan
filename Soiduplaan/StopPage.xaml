@@ -12,7 +12,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
+    shell:SystemTray.IsVisible="True" 
+    xmlns:location="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -58,7 +59,9 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <my:Map Height="184" HorizontalAlignment="Stretch" Name="map1" VerticalAlignment="Top" Width="456" />
+            <location:Map Center="{Binding Coordinates}" ZoomLevel="15" CredentialsProvider="AjBqbbs7yeu75vFw0V9zCeDLX5DIqpZ_qNqR82-jQUhPfrRJV9YUm3VvUWMuJLRM" Height="184" HorizontalAlignment="Stretch" Name="map1" VerticalAlignment="Top" Width="456">
+                <location:Pushpin Location="{Binding Coordinates}" />
+            </location:Map>
             <ListBox Name="routes" ItemsSource="" Margin="0,190,0,0" Width="470">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

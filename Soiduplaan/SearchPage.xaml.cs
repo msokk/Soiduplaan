@@ -19,7 +19,7 @@ namespace Soiduplaan
         public SearchPage()
         {
             InitializeComponent();
-            DataContext = new SearchViewModel();
+            DataContext = App.SearchViewModel;
 
         }
 
