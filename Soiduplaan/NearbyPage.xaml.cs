@@ -9,28 +9,29 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Controls.Maps;
+using System.Windows.Navigation;
 
 namespace Soiduplaan
 {
-    public partial class DetailsPage : PhoneApplicationPage
+    public partial class NearbyPage : PhoneApplicationPage
     {
-        // Constructor
-        public DetailsPage()
+        public NearbyPage()
         {
             InitializeComponent();
+            DataContext = new NearbyViewModel();
         }
 
-        // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string selectedIndex = "";
-            if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
-            {
-                int index = int.Parse(selectedIndex);
-                DataContext = App.ViewModel.Items[index];
-            }
+
+        }
+
+        private void PushPin_Click(object sender, MouseEventArgs e)
+        {
+            Pushpin p = sender as Pushpin;
+            NavigationService.Navigate(new Uri("/StopPage.xaml?id=" + p.Tag.ToString(), UriKind.Relative));
         }
     }
 }

@@ -25,6 +25,26 @@ namespace Soiduplaan
             }
         }
 
+
+        private int _id;
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (value != _id)
+                {
+                    _id = value;
+                    NotifyPropertyChanged("Id");
+                }
+            }
+        }
+
+
         private GeoCoordinate _coordinates;
 
         public GeoCoordinate Coordinates
@@ -43,21 +63,12 @@ namespace Soiduplaan
             }
         }
 
-        private int _distance;
 
         public int Distance
         {
             get
             {
-                return 0; //TODO pass coordinates through getDistance
-            }
-            set
-            {
-                if (value != _distance)
-                {
-                    _distance = value;
-                    NotifyPropertyChanged("Distance");
-                }
+                return (int)CurrentLocation.getDistance(Coordinates);
             }
         }
 

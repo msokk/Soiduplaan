@@ -45,5 +45,10 @@ namespace Soiduplaan
         {
             NavigationService.Navigate(new Uri("/SearchPage.xaml?tab=1", UriKind.Relative));
         }
+
+        private void nearbyTile_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/NearbyPage.xaml", UriKind.Relative));
+        }
     }
 }

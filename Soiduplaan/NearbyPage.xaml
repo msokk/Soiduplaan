@@ -1,21 +1,20 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="Soiduplaan.DetailsPage"
+    x:Class="Soiduplaan.NearbyPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait" 
-    shell:SystemTray.IsVisible="True">
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True" xmlns:location="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
 
-    <!--Data context is set to sample data above and first item in sample data collection below and LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{Binding Items[0]}">
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -23,13 +22,24 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="PageTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="ListTitle" Text="{Binding LineOne}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="SÕIDUPLAAN" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Lähedal" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <!--ContentPanel contains details text. Place additional content here-->
+        <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock x:Name="ContentText" Text="{Binding LineThree}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <location:Map Center="{Binding Current}" ZoomLevel="14" CredentialsProvider="AjBqbbs7yeu75vFw0V9zCeDLX5DIqpZ_qNqR82-jQUhPfrRJV9YUm3VvUWMuJLRM" Height="607" HorizontalAlignment="Left" Name="map1" VerticalAlignment="Top" Width="456" Margin="-1,0,0,0">
+                <location:Pushpin Background="Red" Location="{Binding Current}"></location:Pushpin>
+                <location:MapItemsControl ItemsSource="{Binding NearbyStops}">
+                    <location:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <location:Pushpin Tag="{Binding Id}" MouseLeftButtonUp="PushPin_Click" Location="{Binding Coordinates}">
+                                <TextBlock Text="{Binding Title}" />
+                            </location:Pushpin>
+                        </DataTemplate>
+                    </location:MapItemsControl.ItemTemplate>
+                </location:MapItemsControl>
+            </location:Map>
         </Grid>
     </Grid>
  
