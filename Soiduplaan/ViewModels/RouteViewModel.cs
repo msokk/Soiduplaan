@@ -9,13 +9,67 @@ namespace Soiduplaan
     {
         public RouteViewModel()
         {
-            this.RouteItems = new ObservableCollection<RouteItemViewModel>();
+            this.RouteItemsForward = new ObservableCollection<RouteItemViewModel>();
+
+            //laetakse algne data
             for (int i = 0; i <= 19; i++) {
-                this.RouteItems.Add(new RouteItemViewModel() { Title = "Keemia", NextDeparture = "000", DueTime = "00000"});
+                this.RouteItemsForward.Add(new RouteItemViewModel() { Title = "Mustamäe", NextDeparture = "(12:30)", DueTime = "3 min" });
+            }
+
+            this.Title = "Mustamäe - Kaubamaja";
+            this.Vehicle = "Troll 3";
+            this.RouteItems = this.RouteItemsForward;
+        }
+
+        public void switchDirection(bool backward)
+        {
+            this.Title = (backward) ? "Kaubamaja - Mustamäe" : "Mustamäe - Kaubamaja";
+            if (backward)
+            {
+                if (this.RouteItemsBackward == null)
+                {
+                    this.RouteItemsBackward = new ObservableCollection<RouteItemViewModel>();
+
+                    //laetakse "teistpidi" data
+                    for (int i = 0; i <= 19; i++)
+                    {
+                        this.RouteItemsBackward.Add(new RouteItemViewModel() { Title = "Kaubamaja", NextDeparture = "(11:30)", DueTime = "5 min" });
+                    }
+                }
+                this.RouteItems = this.RouteItemsBackward;
+            }
+            else
+            {
+                this.RouteItems = this.RouteItemsForward;
             }
         }
 
-        public ObservableCollection<RouteItemViewModel> RouteItems { get; private set; }
+        public void switchDay(bool tomorrow)
+        {
+            //ei teagi kuidas seda teha .. veel viimati kahte kollektsiooni vaja või??
+
+        }
+
+        public ObservableCollection<RouteItemViewModel> RouteItemsForward { get; private set; }
+        public ObservableCollection<RouteItemViewModel> RouteItemsBackward { get; private set; }
+
+        private ObservableCollection<RouteItemViewModel> _routeItems;
+
+        public ObservableCollection<RouteItemViewModel> RouteItems
+        {
+            get
+            {
+                return _routeItems;
+            }
+            set
+            {
+                if (value != _routeItems)
+                {
+                    _routeItems = value;
+                    NotifyPropertyChanged("RouteItems");
+                }
+            }
+        }
 
         private string _title;
 
@@ -35,42 +89,23 @@ namespace Soiduplaan
             }
         }
 
-        private string _type;
+        private string _vehicle;
 
-        public string Type
+        public string Vehicle
         {
             get
             {
-                return _type;
+                return _vehicle;
             }
             set
             {
-                if (value != _type)
+                if (value != _vehicle)
                 {
-                    _type = value;
-                    NotifyPropertyChanged("Type");
+                    _vehicle = value;
+                    NotifyPropertyChanged("Vehicle");
                 }
             }
         }
-
-        private string _number;
-
-        public string Number
-        {
-            get
-            {
-                return _number;
-            }
-            set
-            {
-                if (value != _number)
-                {
-                    _number = value;
-                    NotifyPropertyChanged("Number");
-                }
-            }
-        }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
