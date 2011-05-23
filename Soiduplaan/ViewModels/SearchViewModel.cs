@@ -35,7 +35,8 @@ namespace Soiduplaan
             Stop[] stops = Stop.LoadAll();
             foreach (var s in stops)
             {
-                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title });
+                string _iconUrl = "Images/" + "BusIcon.png";
+                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl=_iconUrl });
             }
         }
 

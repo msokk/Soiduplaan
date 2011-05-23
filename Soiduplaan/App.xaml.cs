@@ -30,6 +30,7 @@ namespace Soiduplaan
             }
         }
 
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

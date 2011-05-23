@@ -38,6 +38,8 @@ namespace Soiduplaan
 
         private void showStop(object sender, SelectionChangedEventArgs e)
         {
+            ListBox list = sender as ListBox;
+            int index = list.SelectedIndex;
             NavigationService.Navigate(new Uri("/StopPage.xaml", UriKind.Relative));
         }
     }
