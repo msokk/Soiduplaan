@@ -11,11 +11,20 @@ namespace Soiduplaan
 
         public StopViewModel()
         {
-            _coordinates = CurrentLocation.Current.Location;         
+            this.RouteItems = new ObservableCollection<StopItemViewModel>();
+            _coordinates = CurrentLocation.Current.Location;
+            Stop[] stops = Stop.LoadAll();
+            for (int i=0;i<20;i++){
+                string _iconUrl = "Images/" + "BusIcon.png";
+                this.RouteItems.Add(new StopItemViewModel() { Title = "quack 17a 5554min", IconUrl = _iconUrl });
+            }
         }
 
 
         public ObservableCollection<StopItemViewModel> RouteItems { get; private set; }
+
+
+
 
         private GeoCoordinate _coordinates;
 
