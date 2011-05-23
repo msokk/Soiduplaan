@@ -7,9 +7,16 @@ namespace Soiduplaan
 {
     public class RouteViewModel : INotifyPropertyChanged
     {
-        public RouteViewModel()
+
+        public RouteViewModel(int routeId)
         {
+            Route route = Route.LoadById(routeId);
+            Schedule[] schedules = Schedule.Load(route.Schedules[getDay(false)].Id);
+
             this.RouteItemsForward = new ObservableCollection<RouteItemViewModel>();
+            this.RouteItemsBackward = new ObservableCollection<RouteItemViewModel>();
+
+            
 
             //laetakse algne data
             for (int i = 0; i <= 19; i++) {
@@ -19,6 +26,29 @@ namespace Soiduplaan
             this.Title = "Mustamäe - Kaubamaja";
             this.Vehicle = "Troll 3";
             this.RouteItems = this.RouteItemsForward;
+        }
+
+        private void reLoad(bool tom, int directionId)
+        {
+            
+        }
+
+        private int getDay(bool nextDay = false)
+        {
+            int today = (int)DateTime.Now.DayOfWeek-1;
+            if (nextDay)
+            {
+                int next = today + 1;
+                if (today + 1 > 6)
+                {
+                    next = 0;
+                }
+                return next;
+            }
+            else
+            {
+                return today;
+            }
         }
 
         public void switchDirection(bool backward)

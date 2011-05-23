@@ -10,18 +10,21 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Collections.Generic;
 
 namespace Soiduplaan
 {
 
     public class Data
     {
+        private static Dictionary<string,string> cache = new Dictionary<string, string>();
+
         private static void saveFileToPhone(string filename, string data)
         {
             StreamWriter writer = null;
             try
             {
-
+                cache[filename] = data;
                 IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
                 IsolatedStorageFileStream file = storage.OpenFile(filename, FileMode.Create, FileAccess.Write);
 
@@ -40,29 +43,36 @@ namespace Soiduplaan
 
         public static string loadJSON(string filename)
         {
-            string result = "{}";
-
-            TextReader reader = null;
-            try
+            if (cache.ContainsKey(filename))
             {
+                string result = "{}";
 
-                IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
-                IsolatedStorageFileStream file = storage.OpenFile(filename, FileMode.OpenOrCreate, FileAccess.Read);
-
-                reader = new StreamReader(file);
-                if (file.Length > 0)
+                TextReader reader = null;
+                try
                 {
-                    result = reader.ReadToEnd();
+
+                    IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
+                    IsolatedStorageFileStream file = storage.OpenFile(filename, FileMode.OpenOrCreate, FileAccess.Read);
+
+                    reader = new StreamReader(file);
+                    if (file.Length > 0)
+                    {
+                        result = reader.ReadToEnd();
+                    }
+
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "Error", MessageBoxButton.OK);
+                }
+                reader.Close();
 
+                return result;
             }
-            catch (Exception e)
+            else
             {
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK);
+                return cache[filename];
             }
-            reader.Close();
-
-            return result;
         }
 
         public static void UpdateData()

@@ -14,7 +14,14 @@ namespace Soiduplaan
         {
             get
             {
-                return CurrentLocation.Current.Location;
+                if (CurrentLocation.Current.Location.IsUnknown)
+                {
+                    return null;
+                }
+                else
+                {
+                    return CurrentLocation.Current.Location;
+                }
             }
         }
 
@@ -27,7 +34,8 @@ namespace Soiduplaan
             {
                 for (int u = 0; u < stops[i].SubStops.Length; u++)
                 {
-                    if (CurrentLocation.getDistance(stops[i].SubStops[u].Coordinate) < 1500)
+                    double distance = CurrentLocation.getDistance(stops[i].SubStops[u].Coordinate);
+                    if (distance != 0.0 && distance < 1500)
                     {
                         NearbyStops.Add(new NearbyStopsViewModel()
                         {

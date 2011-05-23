@@ -12,7 +12,7 @@ namespace Soiduplaan
 
         }
 
-        public static Schedule Load(int id, int directionid)
+        public static Schedule[] Load(int id)
         {
             JArray json = JArray.Parse(Data.loadJSON("schedules.json"));
             return null;

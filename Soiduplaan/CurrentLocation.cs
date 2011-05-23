@@ -55,6 +55,10 @@ namespace Soiduplaan
         /// <returns></returns>
         public static double getDistance(GeoCoordinate target)
         {
+            if (Double.IsNaN(current.Location.Latitude))
+            {
+                return 0.0;
+            }
             double curLat = current.Location.Latitude;
             double curLon = current.Location.Longitude;
             double targetLat = target.Latitude;

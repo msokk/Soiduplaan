@@ -11,15 +11,23 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Windows.Navigation;
 
 namespace Soiduplaan
 {
     public partial class RoutePage : PhoneApplicationPage
     {
+        public RouteViewModel rvm;
         public RoutePage()
         {
             InitializeComponent();
-            DataContext = new RouteViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            int routeId = Int32.Parse(NavigationContext.QueryString["routeId"]);
+            rvm = new RouteViewModel(routeId);
+            DataContext = rvm;
         }
 
         private void addToFav(object sender, EventArgs e)
@@ -61,6 +69,7 @@ namespace Soiduplaan
                 slideRightOut.Completed += new EventHandler(slideAnimationCompleted);
                 slideRightOut.Begin();
             }
+            rvm.switchDay(tomorrow);
         }
 
         void slideAnimationCompleted(object sender, EventArgs e)
