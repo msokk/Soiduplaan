@@ -11,19 +11,59 @@ namespace Soiduplaan
 
         public StopViewModel()
         {
+            //Vaja ümber teha kuidagi, sest suundi võib olla mitu
+            //Ilmselt vaja teha list kus sees on kõik erinevad suunad (Collectionitega). Nupuvajutusel tuleb nendest järjest üle itereerida.
             this.RouteItems = new ObservableCollection<StopItemViewModel>();
+            this.RouteItemsForward = new ObservableCollection<StopItemViewModel>();
             _coordinates = CurrentLocation.Current.Location;
-            Stop[] stops = Stop.LoadAll();
-            for (int i=0;i<20;i++){
-                string _iconUrl = "Images/" + "BusIcon.png";
-                this.RouteItems.Add(new StopItemViewModel() { Title = "quack 17a 5554min", IconUrl = _iconUrl });
+
+            this.Title = "Tedre";
+            for (int i = 0; i < 20; i++)
+            {
+                if (i < 10)
+                {
+                    this.RouteItemsForward.Add(new StopItemViewModel() { Title = "3 - Reisisadam (D-terminal)", DueTime = "160 min", IconUrl = "Images/BusIcon.png" });
+                }
+                else
+                {
+                    this.RouteItemsForward.Add(new StopItemViewModel() { Title = "17A - Reisisadam", DueTime = "6 min", IconUrl = "Images/TrammIcon.png" });
+                }
+
             }
+            this.RouteItems = this.RouteItemsForward;
         }
 
+        public void changeDirection()
+        {
+            //uus data laadida, listis kuvada.
+            //this.RouteItems = this.UuteItemiteKollektsioon
+        }
 
-        public ObservableCollection<StopItemViewModel> RouteItems { get; private set; }
+        public void changeDay()
+        {
+            //uus data laadida, listis kuvada.
+            //this.RouteItems = this.UuteItemiteKollektsioon
+        }
 
+        public ObservableCollection<StopItemViewModel> RouteItemsForward { get; private set; }
+        public ObservableCollection<StopItemViewModel> RouteItemsBackward { get; private set; }
 
+        private ObservableCollection<StopItemViewModel> _routeItems;
+        public ObservableCollection<StopItemViewModel> RouteItems
+        {
+            get
+            {
+                return _routeItems;
+            }
+            set
+            {
+                if (value != _routeItems)
+                {
+                    _routeItems = value;
+                    NotifyPropertyChanged("RouteItems");
+                }
+            }
+        }
 
 
         private GeoCoordinate _coordinates;

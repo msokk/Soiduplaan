@@ -22,21 +22,21 @@ namespace Soiduplaan
                         iconName = "Bus";
                         break;
                     case "Busexpress":
-                    iconName = "Bus";
+                        iconName = "Bus";
                         break;
                     default:
                         iconName = (r.Vehicle.StartsWith("H")) ? "Marsa" : r.Vehicle;
                         break;
                 }
                 string _iconUrl = "Images/" + iconName + "Icon.png";
-                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Number + " - " + r.Title, IconUrl = _iconUrl}); 
+                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Number + " - " + r.Title, IconUrl = _iconUrl });
             }
 
             Stop[] stops = Stop.LoadAll();
             foreach (var s in stops)
             {
-                string _iconUrl = "Images/" + "BusIcon.png";
-                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl=_iconUrl });
+                string _iconUrl = "Images/" + "StopIcon.png";
+                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl = _iconUrl });
             }
         }
 

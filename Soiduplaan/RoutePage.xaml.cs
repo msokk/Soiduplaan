@@ -36,7 +36,7 @@ namespace Soiduplaan
         }
 
         bool backward = false;
-        private void switchDirection(object sender, EventArgs e)
+        private void changeDirection(object sender, EventArgs e)
         {
             backward = (backward) ? false : true;
             flipAnimationForward.Completed += new EventHandler(flipAnimationCompleted);
@@ -45,8 +45,8 @@ namespace Soiduplaan
 
         void flipAnimationCompleted(object sender, EventArgs e)
         {
-            ((RouteViewModel)this.DataContext).switchDirection(backward);
-            flipAnimationBackward.Begin(); 
+            ((RouteViewModel)this.DataContext).changeDirection(backward);
+            flipAnimationBackward.Begin();
         }
 
         bool tomorrow = false;
@@ -69,12 +69,12 @@ namespace Soiduplaan
                 slideRightOut.Completed += new EventHandler(slideAnimationCompleted);
                 slideRightOut.Begin();
             }
-            rvm.switchDay(tomorrow);
+            rvm.changeDay(tomorrow);
         }
 
         void slideAnimationCompleted(object sender, EventArgs e)
         {
-            ((RouteViewModel)this.DataContext).switchDay(tomorrow);
+            ((RouteViewModel)this.DataContext).changeDay(tomorrow);
             if (tomorrow)
             {
                 slideLeftIn.Begin();

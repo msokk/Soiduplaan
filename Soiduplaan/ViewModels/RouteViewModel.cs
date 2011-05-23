@@ -16,11 +16,19 @@ namespace Soiduplaan
             this.RouteItemsForward = new ObservableCollection<RouteItemViewModel>();
             this.RouteItemsBackward = new ObservableCollection<RouteItemViewModel>();
 
-            
+
 
             //laetakse algne data
-            for (int i = 0; i <= 19; i++) {
-                this.RouteItemsForward.Add(new RouteItemViewModel() { Title = "Mustamäe", NextDeparture = "(12:30)", DueTime = "3 min" });
+            for (int i = 0; i <= 19; i++)
+            {
+                if (i == 0)
+                    this.RouteItemsForward.Add(new RouteItemViewModel() { Title = "Reisisadam (D-terminal)", NextDeparture = "(12:30)", DueTime = "300 min" });
+                else if (i == 1)
+                    this.RouteItemsForward.Add(new RouteItemViewModel() { Title = "Keemia", NextDeparture = "(12:30)", DueTime = "300 min" });
+                else if (i == 2)
+                    this.RouteItemsForward.Add(new RouteItemViewModel() { Title = "Tallinn (Autobussijaam)", NextDeparture = "(12:30)", DueTime = "3 min" });
+                else
+                    this.RouteItemsForward.Add(new RouteItemViewModel() { Title = "Reisisadam (D-terminal)", NextDeparture = "(12:30)", DueTime = "3 min" });
             }
 
             this.Title = "Mustamäe - Kaubamaja";
@@ -51,7 +59,7 @@ namespace Soiduplaan
             }
         }
 
-        public void switchDirection(bool backward)
+        public void changeDirection(bool backward)
         {
             this.Title = (backward) ? "Kaubamaja - Mustamäe" : "Mustamäe - Kaubamaja";
             if (backward)
@@ -74,7 +82,7 @@ namespace Soiduplaan
             }
         }
 
-        public void switchDay(bool tomorrow)
+        public void changeDay(bool tomorrow)
         {
             //ei teagi kuidas seda teha .. veel viimati kahte kollektsiooni vaja või??
 

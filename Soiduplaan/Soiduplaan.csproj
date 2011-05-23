@@ -260,6 +260,7 @@
     <Resource Include="Images\closeIcon.png" />
     <Resource Include="Images\MarsaIcon.png" />
     <Resource Include="Images\RongIcon.png" />
+    <Resource Include="Images\stopIcon.png" />
     <Content Include="Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="Newtonsoft.Json.WindowsPhone.dll" />
     <Content Include="SplashScreenImage.jpg" />
