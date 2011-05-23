@@ -157,11 +157,7 @@
     </Content>
     <Resource Include="Images\star.png" />
     <Resource Include="Images\TrammIcon2.png" />
-    <Resource Include="Images\BusIcon.png" />
-    <Resource Include="Images\TrollIcon.png" />
-    <Resource Include="Images\MarsaIcon.png" />
-    <Resource Include="Images\RongIcon.png" />
-    <Resource Include="Images\TrammIcon.png" />
+    <Resource Include="Images\TrammIcon3.png" />
     <Content Include="Images\AppBar\appbar.add.rest.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -258,6 +254,12 @@
     <Content Include="Images\AppBar\appbar.upload.rest.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\busIcon.png" />
+    <Resource Include="Images\TrammIcon.png" />
+    <Resource Include="Images\TrollIcon.png" />
+    <Resource Include="Images\closeIcon.png" />
+    <Resource Include="Images\MarsaIcon.png" />
+    <Resource Include="Images\RongIcon.png" />
     <Content Include="Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="Newtonsoft.Json.WindowsPhone.dll" />
     <Content Include="SplashScreenImage.jpg" />
