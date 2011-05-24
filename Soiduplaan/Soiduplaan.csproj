@@ -280,6 +280,7 @@
     <Resource Include="Images\stopIcon.png" />
     <Resource Include="Images\InformationIcon.png" />
     <Resource Include="Images\RouteIcon.png" />
+    <Resource Include="Images\NearbyIcon.png" />
     <Content Include="Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="Newtonsoft.Json.WindowsPhone.dll" />
     <Content Include="SplashScreenImage.jpg" />

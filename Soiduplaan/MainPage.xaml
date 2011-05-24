@@ -36,7 +36,7 @@
     </toolkit:TransitionService.NavigationOutTransition>
 
     <phone:PhoneApplicationPage.Resources>
-        <Style x:Key="TileButton" TargetType="Button">
+        <Style x:Key="ButtonFavs" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -90,7 +90,7 @@
         </Style>
 
 
-            <Style x:Key="ButtonClose" TargetType="Button">
+            <Style x:Key="ButtonNearby" TargetType="Button">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -133,7 +133,7 @@
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
 
-                                <Image Grid.Row="1" Source="Images/closeIcon.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="113" Width="113" Margin="0,5,0,0"/>
+                                <Image Grid.Row="1" Source="Images/NearbyIcon.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="113" Width="113" Margin="0,5,0,0"/>
 
                                 <ContentPresenter Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                             </Grid>
@@ -144,7 +144,7 @@
             </Style>
 
 
-            <Style x:Key="TileButton3" TargetType="Button">
+            <Style x:Key="ButtonStops" TargetType="Button">
         	<Setter Property="Template">
         		<Setter.Value>
         			<ControlTemplate TargetType="Button">
@@ -323,10 +323,10 @@
             </StackPanel>
             <ScrollViewer HorizontalAlignment="Left">
                 <toolkit:WrapPanel Width="346">
-                    <Button Content="Lemmikud" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton}" VerticalAlignment="Top" Width="150" Name="favouriteTile" Click="favouriteTile_Click" />
+                    <Button Content="Lemmikud" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource ButtonFavs}" VerticalAlignment="Top" Width="150" Name="favouriteTile" Click="favouriteTile_Click" />
                     <Button Content="Liinid" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource ButtonRoutes}" VerticalAlignment="Top" Width="150" Name="routeTile" Click="routeTile_Click" />
-                    <Button Content="Peatused" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource TileButton3}" VerticalAlignment="Top" Width="150" Name="stopTile" Click="stopTile_Click" />
-                    <Button Content="Lähedal" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource ButtonClose}" VerticalAlignment="Top" Width="150" Name="nearbyTile" Click="nearbyTile_Click" />
+                    <Button Content="Peatused" HorizontalAlignment="Left" Height="150" Margin="0,0,40,40" Style="{StaticResource ButtonStops}" VerticalAlignment="Top" Width="150" Name="stopTile" Click="stopTile_Click" />
+                    <Button Content="Lähedal" HorizontalAlignment="Left" Height="150" Margin="0,0,0,0" Style="{StaticResource ButtonNearby}" VerticalAlignment="Top" Width="150" Name="nearbyTile" Click="nearbyTile_Click" />
                 </toolkit:WrapPanel>
             </ScrollViewer>
         </Grid>
