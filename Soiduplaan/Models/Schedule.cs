@@ -14,7 +14,7 @@ namespace Soiduplaan
 
         public static Schedule[] Load(int id)
         {
-            JArray json = JArray.Parse(Data.loadJSON("schedules.json"));
+            int i = id;
             return null;
         }
 

@@ -8,11 +8,14 @@ namespace Soiduplaan
     public class RouteViewModel : INotifyPropertyChanged
     {
 
-        public RouteViewModel(int routeId)
+        public RouteViewModel(int id)
         {
-            /*Route route = Route.LoadById(routeId);
+            Route route = Route.LoadById(id);
+            this.Title = route.Title;
+            this.Vehicle = route.getRealName() + " " + route.Number;
+
             Schedule[] schedules = Schedule.Load(route.Schedules[getDay(false)].Id);
-            */
+            
             this.RouteItemsForward = new ObservableCollection<RouteItemViewModel>();
 
             //laetakse algne data
@@ -28,8 +31,7 @@ namespace Soiduplaan
                     this.RouteItemsForward.Add(new RouteItemViewModel() { Title = "Reisisadam (D-terminal)", NextDeparture = "(12:30)", DueTime = "3 min" });
             }
 
-            this.Title = "Mustamäe - Kaubamaja";
-            this.Vehicle = "Troll 3";
+
             this.RouteItems = this.RouteItemsForward;
         }
 

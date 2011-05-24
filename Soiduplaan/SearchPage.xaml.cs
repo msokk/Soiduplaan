@@ -20,7 +20,8 @@ namespace Soiduplaan
         {
             InitializeComponent();
             DataContext = App.SearchViewModel;
-
+            l1.SelectedIndex = -1;
+            l2.SelectedIndex = -1;
         }
 
         // When page is navigated to set data context to selected item in list
@@ -29,23 +30,23 @@ namespace Soiduplaan
             searchPivot.SelectedIndex = Int32.Parse(NavigationContext.QueryString["tab"]);
         }
 
-        private void showRoute(object sender, MouseButtonEventArgs e)
+        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ListBox list = sender as ListBox;
-            int index = list.SelectedIndex;
-            NavigationService.Navigate(new Uri("/RoutePage.xaml?routeId=2109", UriKind.Relative));
+            App.SearchViewModel.Input = textBox1.Text;
         }
 
         private void showStop(object sender, MouseButtonEventArgs e)
         {
-            ListBox list = sender as ListBox;
-            int index = list.SelectedIndex;
-            NavigationService.Navigate(new Uri("/StopPage.xaml", UriKind.Relative));
+            Grid g = sender as Grid;
+            int id = Int32.Parse(g.Tag.ToString());
+            NavigationService.Navigate(new Uri("/StopPage.xaml?id=" + id, UriKind.Relative));
         }
 
-        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
+        private void showRoute(object sender, MouseButtonEventArgs e)
         {
-            App.SearchViewModel.Input = textBox1.Text;
+            Grid g = sender as Grid;
+            int id = Int32.Parse(g.Tag.ToString());
+            NavigationService.Navigate(new Uri("/RoutePage.xaml?id=" + id, UriKind.Relative));
         }
 
     }

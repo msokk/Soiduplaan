@@ -6,6 +6,24 @@ namespace Soiduplaan
 {
     public class SearchItemViewModel : INotifyPropertyChanged
     {
+        private int _id;
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (value != _id)
+                {
+                    _id = value;
+                    NotifyPropertyChanged("Id");
+                }
+            }
+        }
+
         private string _title;
 
         public string Title

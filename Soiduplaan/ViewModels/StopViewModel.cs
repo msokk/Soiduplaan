@@ -9,15 +9,17 @@ namespace Soiduplaan
     public class StopViewModel : INotifyPropertyChanged
     {
 
-        public StopViewModel()
+        public StopViewModel(int id)
         {
             //Vaja ümber teha kuidagi, sest suundi võib olla mitu
             //Ilmselt vaja teha list kus sees on kõik erinevad suunad (Collectionitega). Nupuvajutusel tuleb nendest järjest üle itereerida.
             this.RouteItems = new ObservableCollection<StopItemViewModel>();
             this.RouteItemsForward = new ObservableCollection<StopItemViewModel>();
-            _coordinates = CurrentLocation.Current.Location;
 
-            this.Title = "Tedre";
+            Stop stop = Stop.LoadById(id);
+            _coordinates = stop.SubStops[0].Coordinate;
+
+            this.Title = stop.Title;
             for (int i = 0; i < 20; i++)
             {
                 if (i < 10)

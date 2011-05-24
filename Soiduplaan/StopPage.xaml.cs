@@ -20,12 +20,12 @@ namespace Soiduplaan
         public StopPage()
         {
             InitializeComponent();
-            DataContext = new StopViewModel();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            int id = Int32.Parse(NavigationContext.QueryString["id"]);
+            DataContext = new StopViewModel(id);
         }
 
         private void addToFav(object sender, EventArgs e)

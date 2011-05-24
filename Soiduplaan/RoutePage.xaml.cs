@@ -25,8 +25,8 @@ namespace Soiduplaan
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            int routeId = Int32.Parse(NavigationContext.QueryString["routeId"]);
-            rvm = new RouteViewModel(routeId);
+            int id = Int32.Parse(NavigationContext.QueryString["id"]);
+            rvm = new RouteViewModel(id);
             DataContext = rvm;
         }
 

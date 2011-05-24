@@ -7,6 +7,15 @@ namespace Soiduplaan
 {
     public class Stop
     {
+        private int _id;
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+        }
+
         public class SubStop
         {
             private int _id;
@@ -59,8 +68,9 @@ namespace Soiduplaan
 
 
 
-        public Stop(string title)
+        public Stop(int id, string title)
         {
+            _id = id;
             _title = title;
         }
 
@@ -68,9 +78,9 @@ namespace Soiduplaan
         {
             JArray json = JArray.Parse(Data.loadJSON("stops.json"));
             List<Stop> stops = new List<Stop>();
-            
+            var i = 0;
             foreach(var s in json) {
-                Stop tmpStop = new Stop((string)s["title"]);
+                Stop tmpStop = new Stop(i, (string)s["title"]);
 
                 foreach (var substop in s["stops"])
                 {
@@ -82,6 +92,7 @@ namespace Soiduplaan
                 }
 
                 stops.Add(tmpStop);
+                i++;
             }
 
             return stops.ToArray();

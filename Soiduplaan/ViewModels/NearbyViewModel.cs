@@ -41,7 +41,7 @@ namespace Soiduplaan
                         {
                             Title = stops[i].Title,
                             Coordinates = stops[i].SubStops[u].Coordinate,
-                            Id = stops[i].SubStops[u].Id
+                            Id = stops[i].Id
 
                         });
                     }

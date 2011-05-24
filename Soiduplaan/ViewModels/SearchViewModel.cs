@@ -32,14 +32,14 @@ namespace Soiduplaan
                         break;
                 }
                 string _iconUrl = "Images/" + iconName + "Icon.png";
-                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Number + " - " + r.Title, IconUrl = _iconUrl });
+                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Number + " - " + r.Title, IconUrl = _iconUrl, Id = r.Id });
             }
 
             Stop[] stops = Stop.LoadAll();
             foreach (var s in stops)
             {
                 string _iconUrl = "Images/" + "StopIcon.png";
-                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl = _iconUrl });
+                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl = _iconUrl, Id = s.Id });
             }
             this.PropertyChanged += new PropertyChangedEventHandler(SearchViewModel_PropertyChanged);
         }
@@ -48,23 +48,31 @@ namespace Soiduplaan
         {
             if (e.PropertyName == "Input")
             {
-                StopView.Source = StopItems;
-                RouteView.Source = RouteItems;
-                this.StopView.View.Filter = s =>
+                if (Input == "")
                 {
-                    if (null == s) return true;
-                    var sm = (SearchItemViewModel)s;
-                    var meets = sm.Title.ToLowerInvariant().StartsWith(Input.ToLowerInvariant());
-                    return meets;
-                };
+                    StopView.Source = null;
+                    RouteView.Source = null;
+                }
+                else
+                {
+                    StopView.Source = StopItems;
+                    RouteView.Source = RouteItems;
+                    this.StopView.View.Filter = s =>
+                    {
+                        if (null == s) return true;
+                        var sm = (SearchItemViewModel)s;
+                        var meets = sm.Title.ToLowerInvariant().StartsWith(Input.ToLowerInvariant());
+                        return meets;
+                    };
 
-                this.RouteView.View.Filter = s =>
-                {
-                    if (null == s) return true;
-                    var sm = (SearchItemViewModel)s;
-                    var meets = sm.Title.ToLowerInvariant().StartsWith(Input.ToLowerInvariant());
-                    return meets;
-                };
+                    this.RouteView.View.Filter = s =>
+                    {
+                        if (null == s) return true;
+                        var sm = (SearchItemViewModel)s;
+                        var meets = sm.Title.ToLowerInvariant().StartsWith(Input.ToLowerInvariant());
+                        return meets;
+                    };
+                }
             }
         }
 
