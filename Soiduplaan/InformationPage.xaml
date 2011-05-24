@@ -22,12 +22,18 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="SÕIDUPLAAN" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="info" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Rakenduse tegid:" FontSize="21" Width="437" Height="50" />
+            <TextBlock Text="Mihkel Sokk" FontSize="21" Width="437" />
+            <TextBlock Text="Martin Lensment" FontSize="21" Width="437" />
+            <TextBlock Text="Jaak Lehtsalu" FontSize="21" Width="437" Height="50" />
+            <TextBlock Text="Rakendus on valminud Eesti Infotehnoloogia Kolledži Microsofti mobiilirakenduste aine raames." FontSize="21" Width="437" TextWrapping="Wrap" />
+        </StackPanel>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
