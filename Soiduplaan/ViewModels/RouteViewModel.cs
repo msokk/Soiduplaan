@@ -14,9 +14,6 @@ namespace Soiduplaan
             Schedule[] schedules = Schedule.Load(route.Schedules[getDay(false)].Id);
             */
             this.RouteItemsForward = new ObservableCollection<RouteItemViewModel>();
-            this.RouteItemsBackward = new ObservableCollection<RouteItemViewModel>();
-
-
 
             //laetakse algne data
             for (int i = 0; i <= 19; i++)
@@ -85,8 +82,7 @@ namespace Soiduplaan
         public void changeDay(bool tomorrow)
         {
             //ei teagi kuidas seda teha .. veel viimati kahte kollektsiooni vaja või??
-
-        }
+            }
 
         public ObservableCollection<RouteItemViewModel> RouteItemsForward { get; private set; }
         public ObservableCollection<RouteItemViewModel> RouteItemsBackward { get; private set; }

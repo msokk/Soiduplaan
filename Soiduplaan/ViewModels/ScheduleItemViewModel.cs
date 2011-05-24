@@ -26,6 +26,24 @@ namespace Soiduplaan
             }
         }
 
+        private string _iconUrl;
+
+        public string IconUrl
+        {
+            get
+            {
+                return _iconUrl;
+            }
+            set
+            {
+                if (value != _iconUrl)
+                {
+                    _iconUrl = value;
+                    NotifyPropertyChanged("IconUrl");
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
