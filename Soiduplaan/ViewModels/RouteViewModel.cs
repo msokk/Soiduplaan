@@ -10,9 +10,9 @@ namespace Soiduplaan
 
         public RouteViewModel(int routeId)
         {
-            Route route = Route.LoadById(routeId);
+            /*Route route = Route.LoadById(routeId);
             Schedule[] schedules = Schedule.Load(route.Schedules[getDay(false)].Id);
-
+            */
             this.RouteItemsForward = new ObservableCollection<RouteItemViewModel>();
             this.RouteItemsBackward = new ObservableCollection<RouteItemViewModel>();
 

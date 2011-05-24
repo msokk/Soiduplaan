@@ -33,7 +33,7 @@ namespace Soiduplaan
         {
             ListBox list = sender as ListBox;
             int index = list.SelectedIndex;
-            NavigationService.Navigate(new Uri("/RoutePage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/RoutePage.xaml?routeId=2109", UriKind.Relative));
         }
 
         private void showStop(object sender, SelectionChangedEventArgs e)
