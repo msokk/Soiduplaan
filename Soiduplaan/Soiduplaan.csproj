@@ -141,9 +141,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RouteStop.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="RouteStopPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="SearchPage.xaml">
       <SubType>Designer</SubType>
