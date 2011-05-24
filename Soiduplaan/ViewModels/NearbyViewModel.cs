@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Device.Location;
+using System.Windows.Data;
 
 
 namespace Soiduplaan
@@ -9,6 +11,7 @@ namespace Soiduplaan
     public class NearbyViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<NearbyStopsViewModel> NearbyStops { get; private set; }
+        public CollectionViewSource NearbyView { get; private set; }
 
         public GeoCoordinate Current
         {
@@ -28,7 +31,8 @@ namespace Soiduplaan
 
         public NearbyViewModel()
         {
-            Stop[] stops = Stop.LoadAll();
+            this.NearbyView = new CollectionViewSource();
+            Stop[] stops = App.Stops;
             NearbyStops = new ObservableCollection<NearbyStopsViewModel>();
             for (int i = 0; i < stops.Length; i++)
             {
@@ -42,11 +46,13 @@ namespace Soiduplaan
                             Title = stops[i].Title,
                             Coordinates = stops[i].SubStops[u].Coordinate,
                             Id = stops[i].Id
-
                         });
                     }
                 }
             }
+
+            NearbyView.Source = NearbyStops;
+            NearbyView.View.SortDescriptions.Add(new SortDescription("realDistance", ListSortDirection.Ascending));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

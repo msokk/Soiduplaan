@@ -15,7 +15,7 @@ namespace Soiduplaan
             this.RouteView = new CollectionViewSource();
             this.StopItems = new ObservableCollection<SearchItemViewModel>();
             this.RouteItems = new ObservableCollection<SearchItemViewModel>();
-            Route[] routes = Route.LoadAll();
+            Route[] routes = App.Routes;
             foreach (var r in routes)
             {
                 string iconName = "";
@@ -35,7 +35,7 @@ namespace Soiduplaan
                 this.RouteItems.Add(new SearchItemViewModel() { Title = r.Number + " - " + r.Title, IconUrl = _iconUrl, Id = r.Id });
             }
 
-            Stop[] stops = Stop.LoadAll();
+            Stop[] stops = App.Stops;
             foreach (var s in stops)
             {
                 string _iconUrl = "Images/" + "StopIcon.png";

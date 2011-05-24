@@ -20,8 +20,8 @@ namespace Soiduplaan
         {
             InitializeComponent();
             DataContext = App.SearchViewModel;
-            l1.SelectedIndex = -1;
-            l2.SelectedIndex = -1;
+            l1.SelectedItem = null;
+            l2.SelectedItem = null;
         }
 
         // When page is navigated to set data context to selected item in list

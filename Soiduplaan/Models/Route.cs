@@ -150,8 +150,7 @@ namespace Soiduplaan
 
         public static Route LoadById(int id)
         {
-            Route[] routes = LoadAll();
-            return routes[id];
+            return App.Routes[id];
         }
 
         private Dictionary<string, string> vehicleNames = new Dictionary<string, string>()

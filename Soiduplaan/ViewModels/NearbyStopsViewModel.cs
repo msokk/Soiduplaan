@@ -72,6 +72,14 @@ namespace Soiduplaan
             }
         }
 
+        public int realDistance
+        {
+            get
+            {
+                return (int)CurrentLocation.getDistance(Coordinates);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

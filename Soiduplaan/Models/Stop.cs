@@ -100,8 +100,7 @@ namespace Soiduplaan
 
         public static Stop LoadById(int id)
         {
-            Stop[] stops = LoadAll();
-            return stops[id];
+            return App.Stops[id];
         }
 
 

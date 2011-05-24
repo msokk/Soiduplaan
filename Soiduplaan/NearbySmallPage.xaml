@@ -65,7 +65,7 @@
                     </location:MapItemsControl.ItemTemplate>
                 </location:MapItemsControl>
             </location:Map>
-            <ListBox Name="RoutesList" ItemsSource="{Binding NearbyStops}" Margin="0,190,0,0" Width="470" RenderTransformOrigin="0.5,0.5">
+            <ListBox Name="RoutesList" ItemsSource="{Binding NearbyView.View}" Margin="0,190,0,0" Width="470" RenderTransformOrigin="0.5,0.5">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
