@@ -20,6 +20,7 @@ namespace Soiduplaan
         {
             InitializeComponent();
             DataContext = new NearbyViewModel();
+            RoutesList.SelectedItem = null;
         }
 
         private void map1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -31,6 +32,13 @@ namespace Soiduplaan
         private void map1_MapPan(object sender, MapDragEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Grid g = sender as Grid;
+            int id = Int32.Parse(g.Tag.ToString());
+            NavigationService.Navigate(new Uri("/StopPage.xaml?id=" + id, UriKind.Relative));
         }
 
     }
