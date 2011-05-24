@@ -45,7 +45,7 @@ namespace Soiduplaan
 
         void flipAnimationCompleted(object sender, EventArgs e)
         {
-            ((RouteViewModel)this.DataContext).changeDirection(backward);
+            //((RouteViewModel)this.DataContext).changeDirection(backward);
             flipAnimationBackward.Begin();
         }
 

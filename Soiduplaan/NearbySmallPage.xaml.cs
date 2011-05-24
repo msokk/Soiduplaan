@@ -28,5 +28,10 @@ namespace Soiduplaan
             NavigationService.Navigate(new Uri("/NearbyPage.xaml", UriKind.Relative));
         }
 
+        private void map1_MapPan(object sender, MapDragEventArgs e)
+        {
+            e.Handled = true;
+        }
+
     }
 }

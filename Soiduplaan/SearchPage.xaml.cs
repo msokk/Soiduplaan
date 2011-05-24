@@ -29,18 +29,24 @@ namespace Soiduplaan
             searchPivot.SelectedIndex = Int32.Parse(NavigationContext.QueryString["tab"]);
         }
 
-        private void showRoute(object sender, SelectionChangedEventArgs e)
+        private void showRoute(object sender, MouseButtonEventArgs e)
         {
             ListBox list = sender as ListBox;
             int index = list.SelectedIndex;
             NavigationService.Navigate(new Uri("/RoutePage.xaml?routeId=2109", UriKind.Relative));
         }
 
-        private void showStop(object sender, SelectionChangedEventArgs e)
+        private void showStop(object sender, MouseButtonEventArgs e)
         {
             ListBox list = sender as ListBox;
             int index = list.SelectedIndex;
             NavigationService.Navigate(new Uri("/StopPage.xaml", UriKind.Relative));
         }
+
+        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            App.SearchViewModel.Input = textBox1.Text;
+        }
+
     }
 }

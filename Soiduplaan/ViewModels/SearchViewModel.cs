@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 
 namespace Soiduplaan
 {
@@ -9,7 +11,8 @@ namespace Soiduplaan
     {
         public SearchViewModel()
         {
-            this.AllItems = new ObservableCollection<SearchItemViewModel>();
+            this.StopView = new CollectionViewSource();
+            this.RouteView = new CollectionViewSource();
             this.StopItems = new ObservableCollection<SearchItemViewModel>();
             this.RouteItems = new ObservableCollection<SearchItemViewModel>();
             Route[] routes = Route.LoadAll();
@@ -38,14 +41,46 @@ namespace Soiduplaan
                 string _iconUrl = "Images/" + "StopIcon.png";
                 this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl = _iconUrl });
             }
+            this.PropertyChanged += new PropertyChangedEventHandler(SearchViewModel_PropertyChanged);
         }
 
-        public ObservableCollection<SearchItemViewModel> AllItems { get; private set; }
+        private void SearchViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Input")
+            {
+                StopView.Source = StopItems;
+                RouteView.Source = RouteItems;
+                this.StopView.View.Filter = s =>
+                {
+                    if (null == s) return true;
+                    var sm = (SearchItemViewModel)s;
+                    var meets = sm.Title.ToLowerInvariant().StartsWith(Input.ToLowerInvariant());
+                    return meets;
+                };
+
+                this.RouteView.View.Filter = s =>
+                {
+                    if (null == s) return true;
+                    var sm = (SearchItemViewModel)s;
+                    var meets = sm.Title.ToLowerInvariant().StartsWith(Input.ToLowerInvariant());
+                    return meets;
+                };
+            }
+        }
+
+
+        void SearchView_Filter(object sender, FilterEventArgs e)
+        {
+            if (e.Item != null)
+                e.Accepted = ((SearchItemViewModel)e.Item).Title.StartsWith(Input);
+        }
+
         public ObservableCollection<SearchItemViewModel> StopItems { get; private set; }
         public ObservableCollection<SearchItemViewModel> RouteItems { get; private set; }
+        public CollectionViewSource StopView { get; private set; }
+        public CollectionViewSource RouteView { get; private set; }
 
-
-        private string _input;
+        private string _input = "";
 
         public string Input
         {
@@ -62,11 +97,6 @@ namespace Soiduplaan
                 }
             }
         }
-
-        //TODO: Here be data loading with JSON.NET
-        //And more
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

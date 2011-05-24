@@ -64,11 +64,11 @@ namespace Soiduplaan
         }
 
 
-        public int Distance
+        public string Distance
         {
             get
             {
-                return (int)CurrentLocation.getDistance(Coordinates);
+                return (int)CurrentLocation.getDistance(Coordinates) + "m";
             }
         }
 

@@ -53,20 +53,36 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <location:Map ZoomLevel="15" CredentialsProvider="AjBqbbs7yeu75vFw0V9zCeDLX5DIqpZ_qNqR82-jQUhPfrRJV9YUm3VvUWMuJLRM" Height="184" HorizontalAlignment="Stretch" Name="map1" VerticalAlignment="Top" Width="456" MouseLeftButtonUp="map1_MouseLeftButtonUp">
+            <location:Map MapPan="map1_MapPan" Center="{Binding Current}" ZoomLevel="14" CredentialsProvider="AjBqbbs7yeu75vFw0V9zCeDLX5DIqpZ_qNqR82-jQUhPfrRJV9YUm3VvUWMuJLRM" Height="184" HorizontalAlignment="Stretch" Name="map1" VerticalAlignment="Top" Width="456" MouseLeftButtonUp="map1_MouseLeftButtonUp">
+                <location:Pushpin Background="Red" Location="{Binding Current}"></location:Pushpin>
+                <location:MapItemsControl ItemsSource="{Binding NearbyStops}">
+                    <location:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <location:Pushpin Tag="{Binding Id}" Location="{Binding Coordinates}">
+                                <TextBlock Text="{Binding Title}" />
+                            </location:Pushpin>
+                        </DataTemplate>
+                    </location:MapItemsControl.ItemTemplate>
+                </location:MapItemsControl>
             </location:Map>
             <ListBox Name="RoutesList" ItemsSource="{Binding NearbyStops}" Margin="0,190,0,0" Width="470" RenderTransformOrigin="0.5,0.5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="70" />
-                    </Grid.RowDefinitions>
-                    <Image Source="Images/StopIcon.png" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
-                    <TextBlock Text="{Binding Title}" FontSize="21" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
-                </Grid>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="315" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="70" />
+                            </Grid.RowDefinitions>
+                            <Image Source="Images/StopIcon.png" Stretch="None"  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" />
+                            <TextBlock Text="{Binding Title}" FontSize="21" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" />
+                            <TextBlock Text="{Binding Distance}" FontSize="21" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="2" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
     </Grid>
