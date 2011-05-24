@@ -19,6 +19,7 @@ namespace Soiduplaan
         public FavouritesPage()
         {
             InitializeComponent();
+            DataContext = new FavouriteViewModel();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -112,6 +112,11 @@ namespace Soiduplaan
             }
         }
 
+        private void OnSearchKeyPress(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
+        }
+
         #region Phone application initialization
 
         // Avoid double-initialization

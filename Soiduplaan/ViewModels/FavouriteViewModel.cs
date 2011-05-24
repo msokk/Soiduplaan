@@ -13,6 +13,14 @@ namespace Soiduplaan
             this.StopItems = new ObservableCollection<FavouriteItemViewModel>();
             this.RouteItems = new ObservableCollection<FavouriteItemViewModel>();
             this.RouteStopItems = new ObservableCollection<FavouriteItemViewModel>();
+
+            for (int i = 0; i < 20; i++) {
+
+                this.AllItems.Add(new FavouriteItemViewModel() { Title = "Keemia", IconUrl = "stopIcon.png" });
+
+            }
+
+
         }
 
         public ObservableCollection<FavouriteItemViewModel> AllItems { get; private set; }
@@ -22,6 +30,8 @@ namespace Soiduplaan
 
         //TODO: Here be data loading with JSON.NET
         //And more
+
+
 
 
 

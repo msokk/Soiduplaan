@@ -11,27 +11,22 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Controls.Maps;
-using System.Windows.Navigation;
 
 namespace Soiduplaan
 {
-    public partial class NearbyPage : PhoneApplicationPage
+    public partial class NearbySmallPage : PhoneApplicationPage
     {
-        public NearbyPage()
+        public NearbySmallPage()
         {
             InitializeComponent();
             DataContext = new NearbyViewModel();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-
-        }
-
-        private void PushPin_Click(object sender, MouseEventArgs e)
+        private void map1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Pushpin p = sender as Pushpin;
-            NavigationService.Navigate(new Uri("/StopPage.xaml?id=" + p.Tag.ToString(), UriKind.Relative));
+            NavigationService.Navigate(new Uri("/NearbyPage.xaml", UriKind.Relative));
         }
+
     }
 }
