@@ -71,14 +71,21 @@ namespace Soiduplaan
             }
             else
             {
-                return cache[filename];
+                if (cache.ContainsKey(filename))
+                {
+                    return cache[filename];
+                }
+                else
+                {
+                    return "{}";
+                }
             }
         }
 
+        private static string[] filenames = { "generic.json", "routes.json", "stops.json" };
+
         public static void UpdateData()
         {
-            string[] filenames = { "generic.json", "routes.json", "stops.json" };
-
             for (int i = 0; i < filenames.Length; i++)
             {
                 Download d = new Download(filenames[i]);
@@ -86,9 +93,16 @@ namespace Soiduplaan
             }
         }
 
+        public delegate void DoneHandler(object sender, EventArgs e);
+        public static event DoneHandler Done;
+
         private static void UpdateData_Done(object sender, DownloadedEventArgs e)
         {
             saveFileToPhone(e.Filename, e.JSON);
+            if (filenames[filenames.Length - 1] == e.Filename)
+            {
+                Done(null, new EventArgs());
+            }
         }
 
         public static IsolatedStorageSettings Settings {
@@ -97,5 +111,7 @@ namespace Soiduplaan
                 return IsolatedStorageSettings.ApplicationSettings;
             }
         }
+
+
     }
 }
