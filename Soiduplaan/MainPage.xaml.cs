@@ -55,5 +55,10 @@ namespace Soiduplaan
         {
             NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
         }
+
+        private void showInformation(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/InformationPage.xaml", UriKind.Relative));
+        }
     }
 }
