@@ -41,10 +41,10 @@
         <controls:Pivot Name="searchPivot" Title="SÕIDUPLAAN">
             <!--Pivot item one-->
             <controls:PivotItem Header="liinid">
-                <ListBox MouseLeftButtonDown="showRoute" ItemsSource="{Binding RouteView.View}" Margin="0,3,0,0" Height="487" Width="470">
+                <ListBox Name="l1" ItemsSource="{Binding RouteView.View}" Margin="0,3,0,0" Height="487" Width="470">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid MouseLeftButtonDown="showRoute" Tag="{Binding Id}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="*" />
@@ -62,10 +62,10 @@
 
             <!--Pivot item two-->
             <controls:PivotItem Header="peatused">
-                <ListBox MouseLeftButtonDown="showStop" ItemsSource="{Binding StopView.View}" Margin="0,3,0,0" Height="487" Width="470">
+                <ListBox Name="l2" ItemsSource="{Binding StopView.View}" Margin="0,3,0,0" Height="487" Width="470">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid MouseLeftButtonDown="showStop" Tag="{Binding Id}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="*" />

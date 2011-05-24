@@ -6,6 +6,16 @@ namespace Soiduplaan
 {
     public class Route
     {
+        private int _id;
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+        }
+
         public class Schedule
         {
             private int _id;
@@ -102,8 +112,9 @@ namespace Soiduplaan
             _schedules[dayofweek] = schedule;
         }
 
-        public Route(string number, string title, bool lowfloor, string vehicle)
+        public Route(int id, string number, string title, bool lowfloor, string vehicle)
         {
+            _id = id;
             _number = number;
             _title = title;
             _lowfloor = lowfloor;
@@ -114,11 +125,11 @@ namespace Soiduplaan
         {
             JArray json = JArray.Parse(Data.loadJSON("routes.json"));
             List<Route> routes = new List<Route>();
-            
+            var i = 0;
             foreach(var r in json) {
                 bool lowfloor = ((string)r["lowfloor"] == "1")? true: false;
                 string number = (r["number"].GetType() == typeof(JObject))? "": (string)r["number"];
-                Route tmp = new Route(number, (string)r["title"], 
+                Route tmp = new Route(i, number, (string)r["title"], 
                     lowfloor, (string)r["vehicle"]);
 
                 foreach (var sc in r["schedules"])
@@ -131,6 +142,7 @@ namespace Soiduplaan
                 }
 
                 routes.Add(tmp);
+                i++;
             }
 
             return routes.ToArray();
@@ -142,5 +154,27 @@ namespace Soiduplaan
             return routes[id];
         }
 
+        private Dictionary<string, string> vehicleNames = new Dictionary<string, string>()
+        {
+            { "Bus", "Buss" },
+            { "Bus-p", "Buss" },
+            { "Busexpress", "Ekspressbuss" },
+            { "Harjull", "Harju" },
+            { "Harjuvb", "Harju" },
+            { "HBuss", "Harju" }
+        };
+
+
+        public string getRealName()
+        {
+            if (vehicleNames.ContainsKey(Vehicle))
+            {
+                return vehicleNames[Vehicle];
+            }
+            else
+            {
+                return Vehicle;
+            }
+        }
     }
 }
