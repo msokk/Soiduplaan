@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Device.Location;
 using System.Windows.Data;
 
-
 namespace Soiduplaan
 {
     public class NearbyViewModel : INotifyPropertyChanged

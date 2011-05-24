@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Reactive;
 
 namespace Soiduplaan
 {
@@ -96,7 +97,22 @@ namespace Soiduplaan
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            Data.UpdateData();
+            IScheduler scheduler = Scheduler.NewThread;
+            scheduler.Schedule(new Action(() =>
+                {
+                    Data.UpdateData();
+                    Data.Done += new Data.DoneHandler(Data_Done);
+                }), TimeSpan.FromSeconds(0));
+        }
+
+        void Data_Done(object sender, EventArgs e)
+        {
+            IScheduler scheduler = Scheduler.NewThread;
+            scheduler.Schedule(new Action(() =>
+            {
+                stops = Stop.LoadAll();
+                routes = Route.LoadAll();
+            }), TimeSpan.FromSeconds(0));
         }
 
         // Code to execute when the application is activated (brought to foreground)
