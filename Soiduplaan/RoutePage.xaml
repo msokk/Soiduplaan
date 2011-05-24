@@ -158,7 +158,7 @@
             <Grid.Projection>
                 <PlaneProjection/>
             </Grid.Projection>
-            <ListBox Name="RouteStops" ItemsSource="{Binding RouteItems}" Width="470">
+            <ListBox Name="RouteStops" ItemsSource="{Binding RouteItems}" Width="470" SelectionChanged="showRouteStop">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

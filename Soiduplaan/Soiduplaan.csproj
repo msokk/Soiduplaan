@@ -90,8 +90,8 @@
     <Compile Include="RoutePage.xaml.cs">
       <DependentUpon>RoutePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RouteStop.xaml.cs">
-      <DependentUpon>RouteStop.xaml</DependentUpon>
+    <Compile Include="RouteStopPage.xaml.cs">
+      <DependentUpon>RouteStopPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
@@ -134,7 +134,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RouteStop.xaml">
+    <Page Include="RouteStopPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -85,5 +85,10 @@ namespace Soiduplaan
             }
         }
 
+        private void showRouteStop(object sender, SelectionChangedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/RouteStopPage.xaml", UriKind.Relative));
+        }
+
     }
 }
