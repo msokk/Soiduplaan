@@ -167,6 +167,7 @@
     <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SplashScreenImage.jpg" />
     <Resource Include="Images\star.png" />
     <Resource Include="Images\TrammIcon2.png" />
     <Resource Include="Images\TrammIcon3.png" />
@@ -284,7 +285,6 @@
     <Resource Include="Images\NearbyIcon.png" />
     <Content Include="Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="Newtonsoft.Json.WindowsPhone.dll" />
-    <Content Include="SplashScreenImage.jpg" />
     <Resource Include="Images\star2.png" />
     <Resource Include="Images\stop.png" />
     <Resource Include="Images\stop2.png" />
