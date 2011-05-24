@@ -68,7 +68,7 @@
             <ListBox Name="RoutesList" ItemsSource="{Binding NearbyView.View}" Margin="0,190,0,0" Width="470" RenderTransformOrigin="0.5,0.5">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Tag="{Binding Id}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60" />
                                 <ColumnDefinition Width="315" />
