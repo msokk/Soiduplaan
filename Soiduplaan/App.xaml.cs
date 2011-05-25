@@ -31,34 +31,6 @@ namespace Soiduplaan
             }
         }
 
-        private static Route[] routes = null;
-        public static Route[] Routes
-        {
-            get
-            {
-                if (routes == null)
-                {
-                    routes = Route.LoadAll();
-                }
-                return routes;
-            }
-        }
-
-        private static Stop[] stops = null;
-        public static Stop[] Stops
-        {
-            get
-            {
-                if (stops == null)
-                {
-                    stops = Stop.LoadAll();
-                }
-                    
-                return stops;
-            }
-        }
-
-
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
