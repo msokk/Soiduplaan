@@ -108,7 +108,7 @@ Scraper.prototype.fetch = function(action, params, callback) {
   console.time('Fetch');
   var that = this;
   var d = new Date();
-  var dateString = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
+  var dateString = (d.getDate()-1) + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
   var paramsString = querystring.stringify(params);
   var path = this.cacheDir + '/' + dateString + '-action=' + action 
       + '&' + paramsString;
@@ -165,6 +165,14 @@ Scraper.prototype.printStat = function() {
  * @param {Function} callback for ending the callback
  */
 Scraper.prototype.cycle = function(cLength, codeFunc, doneCb) {
+
+  if(!cLength || cLength == 1) {
+    codeFunc(function() {
+      doneCb();
+    }, 0);
+    return;
+  }
+  
   var i = 0;
   var cb = function() {
     if(i != cLength-1) {
@@ -174,7 +182,7 @@ Scraper.prototype.cycle = function(cLength, codeFunc, doneCb) {
       doneCb();
     }
   }
-  
+   
   codeFunc(cb, i);
 };
 /**
@@ -221,6 +229,80 @@ Scraper.prototype.parseRoute = function(obj, cb) {
     }
   }
 };
+
+Scraper.prototype.parseDirections = function(obj, schedule_id, chunkId, cb) {
+  var that = this;
+  var schedule = {
+    schedule_id: schedule_id,
+    directions: []
+  };
+  
+  that.cycle(obj.length, function(next, i) {
+    if(!obj.length) {
+      var tmpObj = obj;
+      obj = [ tmpObj ];
+    }
+
+    var direction = {
+      id: obj[i]['@'].direction_id,
+      name: obj[i].name,
+      stops : []
+    }
+    
+    var dirStops = obj[i].stops.stop;
+    that.cycle(dirStops.length, function(next2, u) {
+      if(!dirStops.length) {
+        var tmpObj = dirStops;
+        dirStops = [ tmpObj ];
+      }
+      var stopSched = {
+        id: dirStops[u]['@'].stop_id
+      };
+      that.queue('schedule', {
+        'schedule_id': schedule_id,
+        'direction_id': obj[i]['@'].direction_id,
+        'stop_id': dirStops[u]['@'].stop_id
+      }, function(data) {
+        var days = data.days.day;
+        var parsedDays = [];
+        for(var p = 0; p < days.length; p++) {
+          var parseDay = {
+            v: days[p]['@'].day,
+            h: []
+          }
+          for(var p1 = 0; p1 < days[p].hour.length; p1++) {
+            var currentHour = {
+              v: days[p].hour[p1]['@'].hr,
+              m: []
+            }
+            for(var p2 = 0; p2 < days[p].hour[p1].minutes.length; p2++) {
+              var currentMinute = days[p].hour[p1].minutes[p2];
+              currentHour.m.push({
+                v: currentMinute['#'],
+                id: currentMinute['@'].id,
+                lf: currentMinute['@'].lowfloor
+              });
+            }
+            parseDay.h.push(currentHour);
+          }
+
+          parsedDays.push(parseDay);
+        }       
+        
+        stopSched['days'] = parsedDays;
+        direction.stops.push(stopSched);
+        next2();
+      });
+    }, function() {
+      schedule.directions.push(direction);
+      next();
+    });    
+  }, function() {
+    that.out['schedule-' + chunkId].push(schedule);
+    cb();
+  });
+};
+
 
 /**
  * Parses stops from cache
@@ -343,9 +425,45 @@ Scraper.prototype.start = function() {
         
       }
       that.writeObj('stops');
+      stopsDone();
     });
   };
+  
+  //Step 3 - Fetch all directions
+  var stopsDone = function() {
+    var chunkId = 0;
+    that.out['schedule-' + chunkId] = [];
 
+    that.cycle(that.out.routes.length, function(cb, i) {
+      if(i % 20 == 0 && i != 0;) {
+        that.writeObj('schedule-' + chunkId);
+        delete that.out['schedule-' + chunkId];
+        chunkId++;
+        that.out['schedule-' + chunkId] = [];
+      }
+      var schedules = that.out.routes[i].schedules;
+      that.cycle(schedules.length, function(cb2, u) {
+        that.queue('directions', {
+        'schedule_id': schedules[u].id
+        }, function(data) {
+          if(data.directions) {
+          that.parseDirections(data.directions.direction, schedules[u].id, chunkId, function() {
+            cb();
+          });
+          } else {
+            cb();
+          }
+        });
+        
+      }, function() {
+      
+      });
+    }, function() {
+      //POST PROCESS - load all chunks
+      
+      //that.writeObj('schedule');
+    });
+  };
 };
 
 

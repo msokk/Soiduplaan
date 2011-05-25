@@ -4,6 +4,6 @@ var Scraper = require(__dirname + '/lib/scraper');
 
 var scraper = new Scraper({
   log: true,
-  rate: 2
+  rate: 10
 });
 scraper.start();
