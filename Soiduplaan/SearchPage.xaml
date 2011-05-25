@@ -44,7 +44,7 @@
                 <ListBox Name="l1" ItemsSource="{Binding RouteView.View}" Margin="0,3,0,0" Height="487" Width="470">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid MouseLeftButtonDown="showRoute" Tag="{Binding Id}">
+                            <Grid MouseLeftButtonDown="showRoute">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="*" />
@@ -65,7 +65,7 @@
                 <ListBox Name="l2" ItemsSource="{Binding StopView.View}" Margin="0,3,0,0" Height="487" Width="470">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid MouseLeftButtonDown="showStop" Tag="{Binding Id}">
+                            <Grid MouseLeftButtonDown="showStop">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="*" />

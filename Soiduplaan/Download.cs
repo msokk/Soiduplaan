@@ -8,54 +8,52 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace Soiduplaan
 {
     public class DownloadedEventArgs : EventArgs
     {
-        public readonly string JSON;
-        public readonly string Filename;
+        public readonly string Xml;
 
-        public DownloadedEventArgs(string json, string filename)
+        public DownloadedEventArgs(string xml)
         {
-            JSON = json;
-            Filename = filename;
+            Xml = xml;
         }
     }
     public class Download
     {
 
-        private Uri[] mirrors = { new Uri("http://sokk.ee/soiduplaan/"),
-                               new Uri("http://byte.net.ee/soiduplaan/") };
-
-        private int defaultMirror = 1;
-
-        private string fileName = "";
-
         public delegate void DownloadedEventHandler(object sender, DownloadedEventArgs e);
         public event DownloadedEventHandler Done;
 
-        public Download(string name)
+        public Download(Dictionary<string, string> param)
         {
-            fileName = name;
-            int mirrorIndex = defaultMirror;
+            param.Add("t", "xml");
+            UriBuilder ub = new UriBuilder();
+            ub.Host = "soiduplaan.tallinn.ee";
+
+            List<string> qParts = new List<string>();
+            foreach (KeyValuePair<string, string> p in param)
+            {
+                qParts.Add(HttpUtility.UrlEncode(p.Key) + "=" + HttpUtility.UrlEncode(p.Value));
+            }
+            ub.Query = string.Join("&", qParts.ToArray());
+
             WebClient c = new WebClient();
-
-            Uri current = mirrors[mirrorIndex];
             c.DownloadStringCompleted += new DownloadStringCompletedEventHandler(c_DownloadStringCompleted);
-
-            c.DownloadStringAsync(new Uri(current.ToString() + fileName));
+            c.DownloadStringAsync(ub.Uri);
         }
 
         void c_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null)
             {
-                //TODO: Handle mirrors here
+                //TODO: Handle errors
             }
             else
             {
-                Done(null, new DownloadedEventArgs(e.Result, fileName));
+                Done(null, new DownloadedEventArgs(e.Result));
             }
         }
     }

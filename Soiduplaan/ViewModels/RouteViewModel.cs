@@ -10,7 +10,7 @@ namespace Soiduplaan
 
         public RouteViewModel(int id)
         {
-            Route route = Route.LoadById(id);
+            /*
             this.Title = route.Title;
             this.Vehicle = route.getRealName() + " " + route.Number;
 
@@ -33,6 +33,7 @@ namespace Soiduplaan
 
 
             this.RouteItems = this.RouteItemsForward;
+             */
         }
 
         private void reLoad(bool tom, int directionId)

@@ -6,20 +6,20 @@ namespace Soiduplaan
 {
     public class SearchItemViewModel : INotifyPropertyChanged
     {
-        private int _id;
+        private string _navitag;
 
-        public int Id
+        public string NavigationTag
         {
             get
             {
-                return _id;
+                return _navitag;
             }
             set
             {
-                if (value != _id)
+                if (value != _navitag)
                 {
-                    _id = value;
-                    NotifyPropertyChanged("Id");
+                    _title = value;
+                    NotifyPropertyChanged("NavigationTag");
                 }
             }
         }

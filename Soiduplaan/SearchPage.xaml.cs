@@ -37,15 +37,13 @@ namespace Soiduplaan
 
         private void showStop(object sender, MouseButtonEventArgs e)
         {
-            Grid g = sender as Grid;
-            int id = Int32.Parse(g.Tag.ToString());
+            int id = 0;
             NavigationService.Navigate(new Uri("/StopPage.xaml?id=" + id, UriKind.Relative));
         }
 
         private void showRoute(object sender, MouseButtonEventArgs e)
         {
-            Grid g = sender as Grid;
-            int id = Int32.Parse(g.Tag.ToString());
+            int id = 0;
             NavigationService.Navigate(new Uri("/RoutePage.xaml?id=" + id, UriKind.Relative));
         }
 

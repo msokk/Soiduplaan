@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
+using System.Collections.Generic;
 
 namespace Soiduplaan
 {
@@ -15,11 +16,34 @@ namespace Soiduplaan
             this.RouteView = new CollectionViewSource();
             this.StopItems = new ObservableCollection<SearchItemViewModel>();
             this.RouteItems = new ObservableCollection<SearchItemViewModel>();
-            Route[] routes = App.Routes;
-            foreach (var r in routes)
+            string[] types = { "bus", "trolleybus", "tram", "suburban_bus", "commercial_bus", "train" };
+
+            for(int i = 0; i < types.Length; i++) {
+                Data.fetchXML("routes", new Dictionary<string,string>() {
+                  { "transport_id", types[i] }
+                });
+                Data.Done += new Data.XmlFetchEventHandler(Data_Done);
+            }
+
+            /*
+            Stop[] stops = App.Stops;
+            foreach (var s in stops)
+            {
+                string _iconUrl = "Images/" + "StopIcon.png";
+                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl = _iconUrl, Id = s.Id });
+            }
+            */
+            RouteView.Source = RouteItems;
+            this.PropertyChanged += new PropertyChangedEventHandler(SearchViewModel_PropertyChanged);
+        }
+
+        void Data_Done(object sender, Data.XmlFetchEventArgs e)
+        {
+            var routes = e.Xml.Descendants("route");
+            foreach (var route in routes)
             {
                 string iconName = "";
-                switch (r.Vehicle)
+                switch (route.Element("vehicle").Value)
                 {
                     case "Bus-p":
                         iconName = "Bus";
@@ -28,20 +52,21 @@ namespace Soiduplaan
                         iconName = "Bus";
                         break;
                     default:
-                        iconName = (r.Vehicle.StartsWith("H")) ? "Marsa" : r.Vehicle;
+                        iconName = (route.Element("vehicle").Value.StartsWith("H")) ? "Marsa" : route.Element("vehicle").Value;
                         break;
                 }
                 string _iconUrl = "Images/" + iconName + "Icon.png";
-                this.RouteItems.Add(new SearchItemViewModel() { Title = r.Number + " - " + r.Title, IconUrl = _iconUrl, Id = r.Id });
-            }
+                string title = route.Element("direction").Value;
+                if (route.Element("number").Value != "")
+                {
+                    title = route.Element("number").Value + " - " + title;
+                }
 
-            Stop[] stops = App.Stops;
-            foreach (var s in stops)
-            {
-                string _iconUrl = "Images/" + "StopIcon.png";
-                this.StopItems.Add(new SearchItemViewModel() { Title = s.Title, IconUrl = _iconUrl, Id = s.Id });
+
+                string navigation = "schedule_id1=";
+
+                this.RouteItems.Add(new SearchItemViewModel() { Title = title, IconUrl = _iconUrl });
             }
-            this.PropertyChanged += new PropertyChangedEventHandler(SearchViewModel_PropertyChanged);
         }
 
         private void SearchViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

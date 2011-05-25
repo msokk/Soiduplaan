@@ -31,7 +31,7 @@ namespace Soiduplaan
         public NearbyViewModel()
         {
             this.NearbyView = new CollectionViewSource();
-            Stop[] stops = App.Stops;
+            /*
             NearbyStops = new ObservableCollection<NearbyStopsViewModel>();
             for (int i = 0; i < stops.Length; i++)
             {
@@ -52,6 +52,7 @@ namespace Soiduplaan
 
             NearbyView.Source = NearbyStops;
             NearbyView.View.SortDescriptions.Add(new SortDescription("realDistance", ListSortDirection.Ascending));
+        */
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

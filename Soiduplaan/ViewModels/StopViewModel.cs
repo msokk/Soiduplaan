@@ -16,7 +16,7 @@ namespace Soiduplaan
             this.RouteItems = new ObservableCollection<StopItemViewModel>();
             this.RouteItemsForward = new ObservableCollection<StopItemViewModel>();
 
-            Stop stop = Stop.LoadById(id);
+            /*
             _coordinates = stop.SubStops[0].Coordinate;
 
             this.Title = stop.Title;
@@ -33,6 +33,7 @@ namespace Soiduplaan
 
             }
             this.RouteItems = this.RouteItemsForward;
+             */
         }
 
         public void changeDirection()
